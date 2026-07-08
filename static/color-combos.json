@@ -1,0 +1,2278 @@
+{
+  "generated": "2026-07-08",
+  "note": "Every combination the Wefeasto \"Mix colors\" toggle can produce. Preview one: localStorage.setItem(\"wefeasto_colormix\", JSON.stringify(combo.localStorage)) then reload; the site (and its toggle) will show it on every page.",
+  "palette": {
+    "accents": [
+      {
+        "hex": "#ff8d5e",
+        "name": "Coral",
+        "role": "hero band, footer, category chips"
+      },
+      {
+        "hex": "#ffc33a",
+        "name": "Yellow",
+        "role": "CTA buttons"
+      },
+      {
+        "hex": "#d499eb",
+        "name": "Plum",
+        "role": "featured chip, newsletter panel"
+      },
+      {
+        "hex": "#2cdb69",
+        "name": "Lime",
+        "role": "green category tile"
+      }
+    ],
+    "surfaces": [
+      {
+        "hex": "#f9f4ef",
+        "name": "Seashell",
+        "role": "page background, search overlay"
+      },
+      {
+        "hex": "#fff6e7",
+        "name": "Cream",
+        "role": "recipe tag background"
+      },
+      {
+        "hex": "#ffdede",
+        "name": "Blush",
+        "role": "form-error tint"
+      },
+      {
+        "hex": "#fffdfa",
+        "name": "Porcelain",
+        "role": "recommendation card background"
+      }
+    ],
+    "derived": [
+      {
+        "hex": "#ffce60",
+        "follows": "#ffc33a",
+        "mixTowardsWhite": 0.19,
+        "role": "button hover"
+      },
+      {
+        "hex": "#fff3d8",
+        "follows": "#ffc33a",
+        "mixTowardsWhite": 0.8,
+        "role": "lined button fill"
+      }
+    ],
+    "aliases": {
+      "#d498eb": "#d499eb"
+    }
+  },
+  "accentArrangements": [
+    {
+      "id": "A1",
+      "pattern": "Coral ↔ Yellow · Plum ↔ Lime",
+      "movesByName": [
+        {
+          "from": "Coral",
+          "to": "Yellow"
+        },
+        {
+          "from": "Yellow",
+          "to": "Coral"
+        },
+        {
+          "from": "Plum",
+          "to": "Lime"
+        },
+        {
+          "from": "Lime",
+          "to": "Plum"
+        }
+      ],
+      "moves": {
+        "#ff8d5e": "#ffc33a",
+        "#ffc33a": "#ff8d5e",
+        "#d499eb": "#2cdb69",
+        "#2cdb69": "#d499eb"
+      }
+    },
+    {
+      "id": "A2",
+      "pattern": "Coral → Yellow → Plum → Lime → Coral",
+      "movesByName": [
+        {
+          "from": "Coral",
+          "to": "Yellow"
+        },
+        {
+          "from": "Yellow",
+          "to": "Plum"
+        },
+        {
+          "from": "Plum",
+          "to": "Lime"
+        },
+        {
+          "from": "Lime",
+          "to": "Coral"
+        }
+      ],
+      "moves": {
+        "#ff8d5e": "#ffc33a",
+        "#ffc33a": "#d499eb",
+        "#d499eb": "#2cdb69",
+        "#2cdb69": "#ff8d5e"
+      }
+    },
+    {
+      "id": "A3",
+      "pattern": "Coral → Yellow → Lime → Plum → Coral",
+      "movesByName": [
+        {
+          "from": "Coral",
+          "to": "Yellow"
+        },
+        {
+          "from": "Yellow",
+          "to": "Lime"
+        },
+        {
+          "from": "Plum",
+          "to": "Coral"
+        },
+        {
+          "from": "Lime",
+          "to": "Plum"
+        }
+      ],
+      "moves": {
+        "#ff8d5e": "#ffc33a",
+        "#ffc33a": "#2cdb69",
+        "#d499eb": "#ff8d5e",
+        "#2cdb69": "#d499eb"
+      }
+    },
+    {
+      "id": "A4",
+      "pattern": "Coral → Plum → Lime → Yellow → Coral",
+      "movesByName": [
+        {
+          "from": "Coral",
+          "to": "Plum"
+        },
+        {
+          "from": "Yellow",
+          "to": "Coral"
+        },
+        {
+          "from": "Plum",
+          "to": "Lime"
+        },
+        {
+          "from": "Lime",
+          "to": "Yellow"
+        }
+      ],
+      "moves": {
+        "#ff8d5e": "#d499eb",
+        "#ffc33a": "#ff8d5e",
+        "#d499eb": "#2cdb69",
+        "#2cdb69": "#ffc33a"
+      }
+    },
+    {
+      "id": "A5",
+      "pattern": "Coral ↔ Plum · Yellow ↔ Lime",
+      "movesByName": [
+        {
+          "from": "Coral",
+          "to": "Plum"
+        },
+        {
+          "from": "Yellow",
+          "to": "Lime"
+        },
+        {
+          "from": "Plum",
+          "to": "Coral"
+        },
+        {
+          "from": "Lime",
+          "to": "Yellow"
+        }
+      ],
+      "moves": {
+        "#ff8d5e": "#d499eb",
+        "#ffc33a": "#2cdb69",
+        "#d499eb": "#ff8d5e",
+        "#2cdb69": "#ffc33a"
+      }
+    },
+    {
+      "id": "A6",
+      "pattern": "Coral → Plum → Yellow → Lime → Coral",
+      "movesByName": [
+        {
+          "from": "Coral",
+          "to": "Plum"
+        },
+        {
+          "from": "Yellow",
+          "to": "Lime"
+        },
+        {
+          "from": "Plum",
+          "to": "Yellow"
+        },
+        {
+          "from": "Lime",
+          "to": "Coral"
+        }
+      ],
+      "moves": {
+        "#ff8d5e": "#d499eb",
+        "#ffc33a": "#2cdb69",
+        "#d499eb": "#ffc33a",
+        "#2cdb69": "#ff8d5e"
+      }
+    },
+    {
+      "id": "A7",
+      "pattern": "Coral → Lime → Plum → Yellow → Coral",
+      "movesByName": [
+        {
+          "from": "Coral",
+          "to": "Lime"
+        },
+        {
+          "from": "Yellow",
+          "to": "Coral"
+        },
+        {
+          "from": "Plum",
+          "to": "Yellow"
+        },
+        {
+          "from": "Lime",
+          "to": "Plum"
+        }
+      ],
+      "moves": {
+        "#ff8d5e": "#2cdb69",
+        "#ffc33a": "#ff8d5e",
+        "#d499eb": "#ffc33a",
+        "#2cdb69": "#d499eb"
+      }
+    },
+    {
+      "id": "A8",
+      "pattern": "Coral → Lime → Yellow → Plum → Coral",
+      "movesByName": [
+        {
+          "from": "Coral",
+          "to": "Lime"
+        },
+        {
+          "from": "Yellow",
+          "to": "Plum"
+        },
+        {
+          "from": "Plum",
+          "to": "Coral"
+        },
+        {
+          "from": "Lime",
+          "to": "Yellow"
+        }
+      ],
+      "moves": {
+        "#ff8d5e": "#2cdb69",
+        "#ffc33a": "#d499eb",
+        "#d499eb": "#ff8d5e",
+        "#2cdb69": "#ffc33a"
+      }
+    },
+    {
+      "id": "A9",
+      "pattern": "Coral ↔ Lime · Yellow ↔ Plum",
+      "movesByName": [
+        {
+          "from": "Coral",
+          "to": "Lime"
+        },
+        {
+          "from": "Yellow",
+          "to": "Plum"
+        },
+        {
+          "from": "Plum",
+          "to": "Yellow"
+        },
+        {
+          "from": "Lime",
+          "to": "Coral"
+        }
+      ],
+      "moves": {
+        "#ff8d5e": "#2cdb69",
+        "#ffc33a": "#d499eb",
+        "#d499eb": "#ffc33a",
+        "#2cdb69": "#ff8d5e"
+      }
+    }
+  ],
+  "surfaceArrangements": [
+    {
+      "id": "S1",
+      "pattern": "Seashell ↔ Cream · Blush ↔ Porcelain",
+      "movesByName": [
+        {
+          "from": "Seashell",
+          "to": "Cream"
+        },
+        {
+          "from": "Cream",
+          "to": "Seashell"
+        },
+        {
+          "from": "Blush",
+          "to": "Porcelain"
+        },
+        {
+          "from": "Porcelain",
+          "to": "Blush"
+        }
+      ],
+      "moves": {
+        "#f9f4ef": "#fff6e7",
+        "#fff6e7": "#f9f4ef",
+        "#ffdede": "#fffdfa",
+        "#fffdfa": "#ffdede"
+      }
+    },
+    {
+      "id": "S2",
+      "pattern": "Seashell → Cream → Blush → Porcelain → Seashell",
+      "movesByName": [
+        {
+          "from": "Seashell",
+          "to": "Cream"
+        },
+        {
+          "from": "Cream",
+          "to": "Blush"
+        },
+        {
+          "from": "Blush",
+          "to": "Porcelain"
+        },
+        {
+          "from": "Porcelain",
+          "to": "Seashell"
+        }
+      ],
+      "moves": {
+        "#f9f4ef": "#fff6e7",
+        "#fff6e7": "#ffdede",
+        "#ffdede": "#fffdfa",
+        "#fffdfa": "#f9f4ef"
+      }
+    },
+    {
+      "id": "S3",
+      "pattern": "Seashell → Cream → Porcelain → Blush → Seashell",
+      "movesByName": [
+        {
+          "from": "Seashell",
+          "to": "Cream"
+        },
+        {
+          "from": "Cream",
+          "to": "Porcelain"
+        },
+        {
+          "from": "Blush",
+          "to": "Seashell"
+        },
+        {
+          "from": "Porcelain",
+          "to": "Blush"
+        }
+      ],
+      "moves": {
+        "#f9f4ef": "#fff6e7",
+        "#fff6e7": "#fffdfa",
+        "#ffdede": "#f9f4ef",
+        "#fffdfa": "#ffdede"
+      }
+    },
+    {
+      "id": "S4",
+      "pattern": "Seashell → Blush → Porcelain → Cream → Seashell",
+      "movesByName": [
+        {
+          "from": "Seashell",
+          "to": "Blush"
+        },
+        {
+          "from": "Cream",
+          "to": "Seashell"
+        },
+        {
+          "from": "Blush",
+          "to": "Porcelain"
+        },
+        {
+          "from": "Porcelain",
+          "to": "Cream"
+        }
+      ],
+      "moves": {
+        "#f9f4ef": "#ffdede",
+        "#fff6e7": "#f9f4ef",
+        "#ffdede": "#fffdfa",
+        "#fffdfa": "#fff6e7"
+      }
+    },
+    {
+      "id": "S5",
+      "pattern": "Seashell ↔ Blush · Cream ↔ Porcelain",
+      "movesByName": [
+        {
+          "from": "Seashell",
+          "to": "Blush"
+        },
+        {
+          "from": "Cream",
+          "to": "Porcelain"
+        },
+        {
+          "from": "Blush",
+          "to": "Seashell"
+        },
+        {
+          "from": "Porcelain",
+          "to": "Cream"
+        }
+      ],
+      "moves": {
+        "#f9f4ef": "#ffdede",
+        "#fff6e7": "#fffdfa",
+        "#ffdede": "#f9f4ef",
+        "#fffdfa": "#fff6e7"
+      }
+    },
+    {
+      "id": "S6",
+      "pattern": "Seashell → Blush → Cream → Porcelain → Seashell",
+      "movesByName": [
+        {
+          "from": "Seashell",
+          "to": "Blush"
+        },
+        {
+          "from": "Cream",
+          "to": "Porcelain"
+        },
+        {
+          "from": "Blush",
+          "to": "Cream"
+        },
+        {
+          "from": "Porcelain",
+          "to": "Seashell"
+        }
+      ],
+      "moves": {
+        "#f9f4ef": "#ffdede",
+        "#fff6e7": "#fffdfa",
+        "#ffdede": "#fff6e7",
+        "#fffdfa": "#f9f4ef"
+      }
+    },
+    {
+      "id": "S7",
+      "pattern": "Seashell → Porcelain → Blush → Cream → Seashell",
+      "movesByName": [
+        {
+          "from": "Seashell",
+          "to": "Porcelain"
+        },
+        {
+          "from": "Cream",
+          "to": "Seashell"
+        },
+        {
+          "from": "Blush",
+          "to": "Cream"
+        },
+        {
+          "from": "Porcelain",
+          "to": "Blush"
+        }
+      ],
+      "moves": {
+        "#f9f4ef": "#fffdfa",
+        "#fff6e7": "#f9f4ef",
+        "#ffdede": "#fff6e7",
+        "#fffdfa": "#ffdede"
+      }
+    },
+    {
+      "id": "S8",
+      "pattern": "Seashell → Porcelain → Cream → Blush → Seashell",
+      "movesByName": [
+        {
+          "from": "Seashell",
+          "to": "Porcelain"
+        },
+        {
+          "from": "Cream",
+          "to": "Blush"
+        },
+        {
+          "from": "Blush",
+          "to": "Seashell"
+        },
+        {
+          "from": "Porcelain",
+          "to": "Cream"
+        }
+      ],
+      "moves": {
+        "#f9f4ef": "#fffdfa",
+        "#fff6e7": "#ffdede",
+        "#ffdede": "#f9f4ef",
+        "#fffdfa": "#fff6e7"
+      }
+    },
+    {
+      "id": "S9",
+      "pattern": "Seashell ↔ Porcelain · Cream ↔ Blush",
+      "movesByName": [
+        {
+          "from": "Seashell",
+          "to": "Porcelain"
+        },
+        {
+          "from": "Cream",
+          "to": "Blush"
+        },
+        {
+          "from": "Blush",
+          "to": "Cream"
+        },
+        {
+          "from": "Porcelain",
+          "to": "Seashell"
+        }
+      ],
+      "moves": {
+        "#f9f4ef": "#fffdfa",
+        "#fff6e7": "#ffdede",
+        "#ffdede": "#fff6e7",
+        "#fffdfa": "#f9f4ef"
+      }
+    }
+  ],
+  "combos": [
+    {
+      "id": "A1-S1",
+      "accents": "A1",
+      "surfaces": "S1",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A1-S2",
+      "accents": "A1",
+      "surfaces": "S2",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A1-S3",
+      "accents": "A1",
+      "surfaces": "S3",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A1-S4",
+      "accents": "A1",
+      "surfaces": "S4",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A1-S5",
+      "accents": "A1",
+      "surfaces": "S5",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A1-S6",
+      "accents": "A1",
+      "surfaces": "S6",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A1-S7",
+      "accents": "A1",
+      "surfaces": "S7",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A1-S8",
+      "accents": "A1",
+      "surfaces": "S8",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A1-S9",
+      "accents": "A1",
+      "surfaces": "S9",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A2-S1",
+      "accents": "A2",
+      "surfaces": "S1",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A2-S2",
+      "accents": "A2",
+      "surfaces": "S2",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A2-S3",
+      "accents": "A2",
+      "surfaces": "S3",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A2-S4",
+      "accents": "A2",
+      "surfaces": "S4",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A2-S5",
+      "accents": "A2",
+      "surfaces": "S5",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A2-S6",
+      "accents": "A2",
+      "surfaces": "S6",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A2-S7",
+      "accents": "A2",
+      "surfaces": "S7",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A2-S8",
+      "accents": "A2",
+      "surfaces": "S8",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A2-S9",
+      "accents": "A2",
+      "surfaces": "S9",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A3-S1",
+      "accents": "A3",
+      "surfaces": "S1",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A3-S2",
+      "accents": "A3",
+      "surfaces": "S2",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A3-S3",
+      "accents": "A3",
+      "surfaces": "S3",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A3-S4",
+      "accents": "A3",
+      "surfaces": "S4",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A3-S5",
+      "accents": "A3",
+      "surfaces": "S5",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A3-S6",
+      "accents": "A3",
+      "surfaces": "S6",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A3-S7",
+      "accents": "A3",
+      "surfaces": "S7",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A3-S8",
+      "accents": "A3",
+      "surfaces": "S8",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A3-S9",
+      "accents": "A3",
+      "surfaces": "S9",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#ffc33a",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A4-S1",
+      "accents": "A4",
+      "surfaces": "S1",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A4-S2",
+      "accents": "A4",
+      "surfaces": "S2",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A4-S3",
+      "accents": "A4",
+      "surfaces": "S3",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A4-S4",
+      "accents": "A4",
+      "surfaces": "S4",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A4-S5",
+      "accents": "A4",
+      "surfaces": "S5",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A4-S6",
+      "accents": "A4",
+      "surfaces": "S6",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A4-S7",
+      "accents": "A4",
+      "surfaces": "S7",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A4-S8",
+      "accents": "A4",
+      "surfaces": "S8",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A4-S9",
+      "accents": "A4",
+      "surfaces": "S9",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#2cdb69",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#2cdb69"
+        }
+      }
+    },
+    {
+      "id": "A5-S1",
+      "accents": "A5",
+      "surfaces": "S1",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A5-S2",
+      "accents": "A5",
+      "surfaces": "S2",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A5-S3",
+      "accents": "A5",
+      "surfaces": "S3",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A5-S4",
+      "accents": "A5",
+      "surfaces": "S4",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A5-S5",
+      "accents": "A5",
+      "surfaces": "S5",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A5-S6",
+      "accents": "A5",
+      "surfaces": "S6",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A5-S7",
+      "accents": "A5",
+      "surfaces": "S7",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A5-S8",
+      "accents": "A5",
+      "surfaces": "S8",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A5-S9",
+      "accents": "A5",
+      "surfaces": "S9",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A6-S1",
+      "accents": "A6",
+      "surfaces": "S1",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A6-S2",
+      "accents": "A6",
+      "surfaces": "S2",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A6-S3",
+      "accents": "A6",
+      "surfaces": "S3",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A6-S4",
+      "accents": "A6",
+      "surfaces": "S4",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A6-S5",
+      "accents": "A6",
+      "surfaces": "S5",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A6-S6",
+      "accents": "A6",
+      "surfaces": "S6",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A6-S7",
+      "accents": "A6",
+      "surfaces": "S7",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A6-S8",
+      "accents": "A6",
+      "surfaces": "S8",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A6-S9",
+      "accents": "A6",
+      "surfaces": "S9",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#d499eb",
+          "#ffc33a": "#2cdb69",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#54e286",
+          "#fff3d8": "#d5f8e1",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A7-S1",
+      "accents": "A7",
+      "surfaces": "S1",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A7-S2",
+      "accents": "A7",
+      "surfaces": "S2",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A7-S3",
+      "accents": "A7",
+      "surfaces": "S3",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A7-S4",
+      "accents": "A7",
+      "surfaces": "S4",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A7-S5",
+      "accents": "A7",
+      "surfaces": "S5",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A7-S6",
+      "accents": "A7",
+      "surfaces": "S6",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A7-S7",
+      "accents": "A7",
+      "surfaces": "S7",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A7-S8",
+      "accents": "A7",
+      "surfaces": "S8",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A7-S9",
+      "accents": "A7",
+      "surfaces": "S9",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#ff8d5e",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#d499eb",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#ffa37d",
+          "#fff3d8": "#ffe8df",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A8-S1",
+      "accents": "A8",
+      "surfaces": "S1",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A8-S2",
+      "accents": "A8",
+      "surfaces": "S2",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A8-S3",
+      "accents": "A8",
+      "surfaces": "S3",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A8-S4",
+      "accents": "A8",
+      "surfaces": "S4",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A8-S5",
+      "accents": "A8",
+      "surfaces": "S5",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A8-S6",
+      "accents": "A8",
+      "surfaces": "S6",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A8-S7",
+      "accents": "A8",
+      "surfaces": "S7",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A8-S8",
+      "accents": "A8",
+      "surfaces": "S8",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A8-S9",
+      "accents": "A8",
+      "surfaces": "S9",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ff8d5e",
+          "#2cdb69": "#ffc33a",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ff8d5e"
+        }
+      }
+    },
+    {
+      "id": "A9-S1",
+      "accents": "A9",
+      "surfaces": "S1",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A9-S2",
+      "accents": "A9",
+      "surfaces": "S2",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A9-S3",
+      "accents": "A9",
+      "surfaces": "S3",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fff6e7",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A9-S4",
+      "accents": "A9",
+      "surfaces": "S4",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fffdfa",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A9-S5",
+      "accents": "A9",
+      "surfaces": "S5",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A9-S6",
+      "accents": "A9",
+      "surfaces": "S6",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#ffdede",
+          "#fff6e7": "#fffdfa",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A9-S7",
+      "accents": "A9",
+      "surfaces": "S7",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#f9f4ef",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#ffdede",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A9-S8",
+      "accents": "A9",
+      "surfaces": "S8",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#f9f4ef",
+          "#fffdfa": "#fff6e7",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    },
+    {
+      "id": "A9-S9",
+      "accents": "A9",
+      "surfaces": "S9",
+      "localStorage": {
+        "v": 1,
+        "map": {
+          "#ff8d5e": "#2cdb69",
+          "#ffc33a": "#d499eb",
+          "#d499eb": "#ffc33a",
+          "#2cdb69": "#ff8d5e",
+          "#f9f4ef": "#fffdfa",
+          "#fff6e7": "#ffdede",
+          "#ffdede": "#fff6e7",
+          "#fffdfa": "#f9f4ef",
+          "#ffce60": "#dcacef",
+          "#fff3d8": "#f6ebfb",
+          "#d498eb": "#ffc33a"
+        }
+      }
+    }
+  ]
+}

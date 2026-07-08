@@ -1649,3 +1649,123 @@
     padding-right: 12px;
   }
 }
+
+/* ---------- colour mix toggle ---------- */
+/* Floating switch rendered on every page by ColorMixToggle.svelte. When on, the
+   site palette is shuffled via an override stylesheet + inline-style rewrite;
+   the swatch dots below use palette literals so they preview the live mix. */
+
+.wf-colormix {
+  z-index: 900;
+  color: #333;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 100px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  line-height: 1;
+  display: flex;
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  box-shadow: 0 6px 18px rgba(51, 51, 51, .14);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.wf-colormix:hover {
+  box-shadow: 0 10px 24px rgba(51, 51, 51, .2);
+  transform: translateY(-2px);
+}
+
+.wf-colormix:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
+.wf-colormix-dots {
+  display: inline-flex;
+}
+
+.wf-colormix-dots i {
+  width: 11px;
+  height: 11px;
+  background-color: #ff8d5e;
+  border: 1px solid #333;
+  border-radius: 50%;
+}
+
+.wf-colormix-dots i + i {
+  margin-left: -4px;
+}
+
+.wf-colormix-dots i:nth-child(2) {
+  background-color: #ffc33a;
+}
+
+.wf-colormix-dots i:nth-child(3) {
+  background-color: #d499eb;
+}
+
+.wf-colormix-switch {
+  width: 30px;
+  height: 18px;
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 100px;
+  position: relative;
+  transition: background-color .18s ease;
+}
+
+.wf-colormix-switch:after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background-color: #333;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform .18s ease, background-color .18s ease;
+}
+
+.wf-colormix[aria-checked="true"] .wf-colormix-switch {
+  background-color: #333;
+}
+
+.wf-colormix[aria-checked="true"] .wf-colormix-switch:after {
+  background-color: #fff;
+  transform: translateX(12px);
+}
+
+@media screen and (max-width: 479px) {
+  .wf-colormix {
+    bottom: 12px;
+    left: 12px;
+    padding: 7px 12px;
+  }
+
+  .wf-colormix-label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-colormix,
+  .wf-colormix-switch,
+  .wf-colormix-switch:after {
+    transition: none;
+  }
+}
+
+@media print {
+  .wf-colormix {
+    display: none;
+  }
+}

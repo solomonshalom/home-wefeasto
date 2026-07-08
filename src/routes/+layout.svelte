@@ -4,6 +4,7 @@
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import SearchOverlay from '$lib/components/SearchOverlay.svelte';
+	import ColorMixToggle from '$lib/components/ColorMixToggle.svelte';
 	import { snapCloseSearch } from '$lib/search.js';
 	import {
 		initLenis,
@@ -68,3 +69,4 @@
 <SearchOverlay />
 {@render children()}
 <Footer />
+<ColorMixToggle />

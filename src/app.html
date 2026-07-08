@@ -30,10 +30,18 @@
   var reduce = false;
   try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
   if (NOFX || reduce || typeof window.gsap === 'undefined') return;
+  // A stored colour-mix shuffle remaps the page background — the first-paint
+  // veil must match it (the ColorMixToggle component keeps it in sync later).
+  var bg = '#f9f4ef';
+  try {
+    var mix = JSON.parse(window.localStorage.getItem('wefeasto_colormix') || 'null');
+    var mapped = mix && mix.map && mix.map['#f9f4ef'];
+    if (typeof mapped === 'string' && /^#[0-9a-f]{6}$/i.test(mapped)) bg = mapped;
+  } catch (e) {}
   var veil = document.createElement('div');
   veil.id = 'wf-veil';
   veil.setAttribute('aria-hidden', 'true');
-  veil.style.cssText = 'position:fixed;inset:0;z-index:9999;background:#f9f4ef;opacity:1;pointer-events:none;';
+  veil.style.cssText = 'position:fixed;inset:0;z-index:9999;background:' + bg + ';opacity:1;pointer-events:none;';
   document.body.appendChild(veil);
   window.setTimeout(function () {
     if (veil.parentNode && veil.style.opacity === '1') { veil.style.opacity = '0'; veil.style.display = 'none'; }
