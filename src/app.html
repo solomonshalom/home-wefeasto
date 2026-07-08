@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html data-wf-domain="the-foodie-fact-v2.webflow.io" data-wf-page="626ae46f2ad86d3fbf0e2538" data-wf-site="626ae46f2ad86d0f390e253b" data-wf-status="1" lang="en" class="w-mod-js w-mod-ix">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<meta content="Webflow" name="generator">
+<link href="%sveltekit.assets%/css/webflow.css" rel="stylesheet" type="text/css">
+<link href="%sveltekit.assets%/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link href="%sveltekit.assets%/images/webclip.png" rel="apple-touch-icon">
+<link rel="stylesheet" href="%sveltekit.assets%/css/inline_styles.css">
+<link rel="stylesheet" href="%sveltekit.assets%/css/wefeasto.css">
+<script>
+// Webflow: mark the document as touch-capable (w-mod-js / w-mod-ix are baked in above).
+!function(o,c){var n=c.documentElement,t=" w-mod-";("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);
+</script>
+<script src="%sveltekit.assets%/js/gsap.min.js"></script>
+<script src="%sveltekit.assets%/js/ScrollTrigger.min.js"></script>
+<script src="%sveltekit.assets%/js/ScrollToPlugin.min.js"></script>
+<script src="%sveltekit.assets%/js/lenis.min.js"></script>
+%sveltekit.head%
+</head>
+<body class="body">
+<script>
+/* Page-transition veil, created before first paint and before hydration (same
+   pre-paint mechanism as the original js/wefeasto.js). Never exists under
+   ?nofx=1 / prefers-reduced-motion / missing GSAP. The app fades it out on
+   boot; a safety timer hides it if the app fails to start. */
+(function () {
+  var NOFX = /[?&]nofx=1/.test(window.location.search);
+  var reduce = false;
+  try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  if (NOFX || reduce || typeof window.gsap === 'undefined') return;
+  var veil = document.createElement('div');
+  veil.id = 'wf-veil';
+  veil.setAttribute('aria-hidden', 'true');
+  veil.style.cssText = 'position:fixed;inset:0;z-index:9999;background:#f9f4ef;opacity:1;pointer-events:none;';
+  document.body.appendChild(veil);
+  window.setTimeout(function () {
+    if (veil.parentNode && veil.style.opacity === '1') { veil.style.opacity = '0'; veil.style.display = 'none'; }
+  }, 4000);
+})();
+</script>
+<div style="display: contents">%sveltekit.body%</div>
+</body>
+</html>

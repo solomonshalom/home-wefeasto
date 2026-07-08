@@ -1,0 +1,1651 @@
+/*
+ * Wefeasto extensions — wf- prefixed classes ONLY.
+ * Extends the Foodie Fact design language: seashell bg, #333 ink, Moderat,
+ * 1px #333 borders, sharp media corners (like .image-4/.div-block-85),
+ * pill radius 100px controls (like .button/.text-field-2).
+ * Never edit css/webflow.css.
+ */
+
+/* ---------- generic helpers ---------- */
+
+.wf-no-scroll {
+  overflow: hidden;
+}
+
+.wf-search-open {
+  cursor: pointer;
+}
+
+/* Chip — mirrors .text-block-3 */
+.wf-chip {
+  color: #333;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 1px solid #333;
+  justify-content: center;
+  align-items: center;
+  height: 34px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+}
+
+.wf-chip.wf-chip-small {
+  height: 26px;
+  font-size: 10px;
+}
+
+.wf-chip.wf-chip-coral {
+  background-color: var(--coral, #ff8d5e);
+}
+
+.wf-chip.wf-chip-plum {
+  background-color: var(--plum, #d499eb);
+}
+
+/* Price text on cards / detail pages */
+.wf-price {
+  color: #333;
+  font-family: Moderat, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.wf-price.wf-price-large {
+  font-size: 28px;
+}
+
+/* Card helpers (used with .div-block-84/.div-block-85/.image-4) */
+.wf-card {
+  position: relative;
+}
+
+.wf-card-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+}
+
+.wf-card-link {
+  color: #333;
+  text-decoration: none;
+}
+
+.wf-card-meta {
+  color: #333;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  display: flex;
+}
+
+/* ---------- cart badge ---------- */
+
+/* Put .wf-cart-anchor on the bag icon link so the badge can pin to it. */
+.wf-cart-anchor {
+  position: relative;
+}
+
+.wf-cart-count {
+  color: #fff;
+  text-align: center;
+  background-color: var(--coral, #ff8d5e);
+  border: 1px solid #333;
+  border-radius: 100px;
+  justify-content: center;
+  align-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  font-family: Moderat, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-flex;
+  position: absolute;
+  /* Pin to the icon's top-right corner. The cart link is a full-height (70px)
+     cell in a sticky top:0 nav, so a negative `top` pushed the badge above the
+     viewport and clipped it. Offsetting from the link's centre (= the centred
+     24px icon's centre) keeps it on the corner at any nav height. */
+  top: 50%;
+  left: 50%;
+  transform: translate(calc(-50% + 13px), calc(-50% - 12px));
+  pointer-events: none;
+}
+
+.wf-cart-count.wf-is-hidden,
+.wf-cart-count:empty {
+  display: none;
+}
+
+/* ---------- star rating (.5 precision via clipped overlay) ----------
+   Markup: <div class="wf-stars" role="img" aria-label="Rated 4.5 out of 5"
+             style="--wf-rating:4.5"><span class="wf-stars-fill">★★★★★</span></div> */
+
+.wf-stars {
+  color: #d8d0c6;
+  letter-spacing: 2px;
+  font-size: 16px;
+  line-height: 1;
+  display: inline-block;
+  position: relative;
+}
+
+.wf-stars::before {
+  content: "★★★★★";
+}
+
+.wf-stars-fill {
+  color: #333;
+  white-space: nowrap;
+  letter-spacing: 2px;
+  width: calc(var(--wf-rating, 5) / 5 * 100%);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+/* ---------- quantity stepper ---------- */
+
+.wf-qty {
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 100px;
+  align-items: center;
+  height: 50px;
+  display: inline-flex;
+  overflow: hidden;
+}
+
+.wf-qty-btn {
+  color: #333;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  width: 48px;
+  height: 100%;
+  padding: 0;
+  font-family: Moderat, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.wf-qty-btn:hover {
+  background-color: var(--seashell, #f9f4ef);
+}
+
+.wf-qty-input {
+  color: #333;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  width: 44px;
+  height: 100%;
+  padding: 0;
+  font-family: Moderat, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.wf-qty-input:focus {
+  outline: none;
+}
+
+.wf-qty-input::-webkit-outer-spin-button,
+.wf-qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ---------- "Also available at" partner dropdown ---------- */
+
+.wf-partners {
+  display: inline-block;
+  position: relative;
+}
+
+.wf-partners-trigger {
+  color: #333;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #333;
+  border-radius: 100px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+  padding: 0 24px 2px;
+  font-family: Moderat, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+}
+
+.wf-partners-caret {
+  font-size: 12px;
+  transition: transform .2s;
+  display: inline-block;
+}
+
+.wf-partners.wf-open .wf-partners-caret {
+  transform: rotate(180deg);
+}
+
+.wf-partners-list {
+  z-index: 30;
+  background-color: #fff;
+  border: 1px solid #333;
+  min-width: 260px;
+  padding: 8px 0;
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+}
+
+.wf-partners.wf-open .wf-partners-list {
+  display: block;
+}
+
+.wf-partner-row {
+  color: #333;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  display: flex;
+}
+
+.wf-partner-row:hover {
+  background-color: var(--seashell, #f9f4ef);
+}
+
+.wf-partner-buy {
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+/* ---------- forms (checkout / login) — match .text-field-2 pill look ---------- */
+
+.wf-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.wf-label {
+  color: #333;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  display: block;
+}
+
+.wf-input,
+.wf-select {
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 100px;
+  width: 100%;
+  height: 50px;
+  padding: 0 24px;
+  font-family: Moderat, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.wf-select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath stroke='%23333' stroke-width='1.5' d='m1 1 4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 22px center;
+  background-repeat: no-repeat;
+  padding-right: 44px;
+}
+
+.wf-textarea {
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 24px;
+  width: 100%;
+  min-height: 120px;
+  padding: 16px 24px;
+  font-family: Moderat, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  resize: vertical;
+}
+
+.wf-input:focus,
+.wf-select:focus,
+.wf-textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(51, 51, 51, .18);
+}
+
+.wf-input::placeholder,
+.wf-textarea::placeholder {
+  color: rgba(51, 51, 51, .45);
+}
+
+.wf-form-note {
+  color: #333;
+  font-size: 12px;
+  line-height: 165%;
+}
+
+/* ---------- video ---------- */
+
+/* Sharp frame like .image-4 media inside .div-block-85 (template uses square
+   corners + 1px #000 borders — no large radius anywhere on media). */
+.wf-video-wrap {
+  width: 100%;
+  position: relative;
+}
+
+.wf-video {
+  object-fit: cover;
+  background-color: #333;
+  border: 1px solid #000;
+  border-radius: 0;
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+}
+
+/* ---------- parallax ---------- */
+
+.wf-parallax {
+  overflow: hidden;
+}
+
+.wf-parallax-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+/* ---------- search overlay ---------- */
+
+.wf-search-overlay {
+  z-index: 9999;
+  background-color: var(--seashell, #f9f4ef);
+  flex-direction: column;
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+
+.wf-search-overlay[hidden] {
+  display: none;
+}
+
+.wf-search-inner {
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 42px 24px 24px;
+  display: flex;
+  min-height: 0;
+}
+
+.wf-search-bar {
+  border-bottom: 1px solid #333;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 16px;
+  display: flex;
+}
+
+.wf-search-input {
+  color: #333;
+  caret-color: #333; /* the (natively blinking) caret is the only focus cue */
+  background-color: transparent;
+  border: none;
+  flex: 1;
+  width: 100%;
+  padding: 0;
+  font-family: Moderat, sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 110%;
+}
+
+.wf-search-input:focus,
+.wf-search-input:focus-visible {
+  outline: none;
+}
+
+.wf-search-input::placeholder {
+  color: rgba(51, 51, 51, .35);
+}
+
+.wf-search-close {
+  color: #333;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #333;
+  border-radius: 100px;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  font-family: Moderat, sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1;
+  display: flex;
+}
+
+.wf-search-close:hover {
+  background-color: #333;
+  color: #f9f4ef;
+}
+
+.wf-search-results {
+  grid-column-gap: 42px;
+  grid-row-gap: 42px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  flex: 1;
+  margin-top: 42px;
+  padding-bottom: 42px;
+  display: grid;
+  align-content: start;
+  overflow-y: auto;
+}
+
+.wf-search-card {
+  color: #333;
+  flex-direction: column;
+  text-decoration: none;
+  display: flex;
+}
+
+.wf-search-card-media {
+  border: 1px solid #333;
+  height: 180px;
+  display: block;
+  overflow: hidden;
+}
+
+.wf-search-card-media img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  transition: transform .4s;
+}
+
+.wf-search-card:hover .wf-search-card-media img {
+  transform: scale(1.04);
+}
+
+.wf-search-card-name {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.wf-search-card-meta {
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  display: flex;
+}
+
+.wf-search-card-cat {
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+  opacity: .6;
+}
+
+.wf-search-empty {
+  color: #333;
+  grid-column: 1 / -1;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* ---------- responsive (template breakpoints) ---------- */
+
+@media screen and (max-width: 991px) {
+  .wf-search-results {
+    grid-column-gap: 24px;
+    grid-row-gap: 32px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .wf-search-input {
+    font-size: 34px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .wf-search-results {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .wf-search-input {
+    font-size: 26px;
+  }
+
+  .wf-search-inner {
+    padding-top: 24px;
+  }
+
+  .wf-search-card-media {
+    height: 150px;
+  }
+
+  .wf-partners-list {
+    min-width: 220px;
+  }
+
+  .wf-price.wf-price-large {
+    font-size: 24px;
+  }
+}
+
+/* ---------- recipes category filter (recipes.html) ---------- */
+
+.wf-filter-bar {
+  flex-wrap: wrap;
+  gap: 12px;
+  display: flex;
+}
+
+.wf-filter-chip {
+  cursor: pointer;
+  font-family: Moderat, sans-serif;
+  transition: background-color .2s;
+}
+
+.wf-filter-chip:hover {
+  background-color: #fff;
+}
+
+.wf-filter-chip.wf-active {
+  background-color: var(--coral, #ff8d5e);
+}
+
+@media screen and (max-width: 479px) {
+  .wf-search-results {
+    grid-row-gap: 24px;
+    grid-template-columns: 1fr;
+  }
+
+  .wf-search-input {
+    font-size: 22px;
+  }
+
+  .wf-search-close {
+    width: 42px;
+    height: 42px;
+  }
+
+  .wf-search-card-media {
+    height: 190px;
+  }
+
+  .wf-qty,
+  .wf-partners-trigger {
+    height: 46px;
+  }
+
+  .wf-qty-btn {
+    width: 42px;
+  }
+}
+
+/* ---------- shop toolbar & product grid (shop.html) ---------- */
+
+.wf-shop-header {
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 650px;
+  display: flex;
+}
+
+.wf-shop-toolbar {
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  width: 100%;
+  display: flex;
+}
+
+.wf-shop-search {
+  color: #333;
+  width: auto;
+  flex: 1 1 280px;
+  max-width: 450px;
+  padding-left: 24px;
+  padding-right: 24px;
+  font-family: Moderat, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.wf-shop-filters {
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  display: flex;
+}
+
+.wf-shop-grid {
+  grid-row-gap: 42px;
+  width: 100%;
+}
+
+.wf-view-cue {
+  z-index: 3;
+  color: #fff;
+  white-space: nowrap;
+  pointer-events: none;
+  background-color: var(--coral, #ff8d5e);
+  border: 1px solid #333;
+  border-radius: 100px;
+  padding: 12px 20px;
+  font-family: Moderat, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 100%;
+  opacity: 0;
+  transition: opacity .25s, transform .25s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(.75);
+}
+
+.wf-card:hover .wf-view-cue,
+.wf-card:focus-within .wf-view-cue {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.wf-shop-add {
+  position: relative;
+  z-index: 5;
+}
+
+@media screen and (max-width: 767px) {
+  .wf-shop-search {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}
+
+/* ---------- cart rows (cart.html) ---------- */
+
+.wf-cart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  grid-column-gap: 42px;
+  grid-row-gap: 42px;
+  align-items: start;
+  width: 100%;
+}
+
+.wf-cart-rows {
+  min-width: 0;
+  border-top: 1px solid rgba(51, 51, 51, .18);
+}
+
+.wf-cart-row {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) auto auto auto;
+  grid-template-areas: "thumb info qty line remove";
+  grid-column-gap: 24px;
+  grid-row-gap: 14px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(51, 51, 51, .18);
+  overflow: hidden;
+}
+
+.wf-cart-thumb {
+  grid-area: thumb;
+  display: block;
+  width: 90px;
+  height: 90px;
+  background-color: #fff;
+  border: 1px solid #333;
+  overflow: hidden;
+}
+
+.wf-cart-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.wf-cart-info {
+  grid-area: info;
+  min-width: 0;
+}
+
+.wf-cart-name {
+  color: #333;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 130%;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.wf-cart-name:hover {
+  text-decoration: underline;
+}
+
+.wf-cart-unit {
+  color: #333;
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.wf-cart-qty {
+  grid-area: qty;
+}
+
+.wf-cart-line {
+  grid-area: line;
+  min-width: 76px;
+  text-align: right;
+}
+
+.wf-cart-remove {
+  grid-area: remove;
+  appearance: none;
+  -webkit-appearance: none;
+  color: #333;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #333;
+  border-radius: 100px;
+  justify-content: center;
+  align-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  font-family: Moderat, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-flex;
+}
+
+.wf-cart-remove:hover {
+  background-color: #333;
+  color: #f9f4ef;
+}
+
+.wf-cart-empty {
+  text-align: center;
+  width: 100%;
+  padding: 56px 24px;
+}
+
+.wf-cart-empty-actions {
+  justify-content: center;
+  display: flex;
+}
+
+@media screen and (max-width: 991px) {
+  .wf-cart-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .wf-cart-row {
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    grid-template-areas: "thumb info remove" "thumb qty line";
+    grid-column-gap: 16px;
+  }
+
+  .wf-cart-thumb {
+    width: 72px;
+    height: 72px;
+  }
+
+  .wf-cart-line {
+    text-align: right;
+  }
+}
+
+/* ---------- order summary card (cart.html + checkout.html) ---------- */
+
+.wf-summary {
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 24px;
+  width: 100%;
+  padding: 32px;
+}
+
+.wf-summary-heading {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.wf-summary-divider {
+  border-top: 1px solid rgba(51, 51, 51, .25);
+  margin: 14px 0;
+}
+
+.wf-summary-row {
+  color: #333;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 5px 0;
+  font-size: 16px;
+  display: flex;
+}
+
+.wf-summary-row.wf-summary-total {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.wf-summary-note {
+  color: #333;
+  opacity: .7;
+  padding: 2px 0 8px;
+  font-size: 13px;
+  line-height: 150%;
+}
+
+.wf-summary-actions {
+  display: grid;
+  grid-row-gap: 12px;
+  margin-top: 22px;
+}
+
+@media screen and (max-width: 767px) {
+  .wf-summary {
+    padding: 24px;
+  }
+}
+
+/* ---------- checkout (checkout.html) ---------- */
+
+.wf-co-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  grid-column-gap: 42px;
+  grid-row-gap: 42px;
+  align-items: start;
+  width: 100%;
+}
+
+.wf-co-form {
+  min-width: 0;
+}
+
+.wf-co-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 16px;
+}
+
+.wf-co-subhead {
+  margin-top: 10px;
+  margin-bottom: 16px;
+}
+
+.wf-pay-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.wf-pay-pill {
+  color: #333;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 100px;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  padding: 0 24px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  display: inline-flex;
+  position: relative;
+}
+
+.wf-pay-pill input {
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+}
+
+.wf-pay-pill:has(input:checked) {
+  background-color: #333;
+  color: #f9f4ef;
+}
+
+.wf-pay-pill:focus-within {
+  box-shadow: 0 0 0 2px rgba(51, 51, 51, .18);
+}
+
+.wf-pay-panel[hidden] {
+  display: none;
+}
+
+.wf-co-thanks {
+  text-align: center;
+  width: 100%;
+  padding: 56px 24px;
+}
+
+.wf-co-thanks[hidden] {
+  display: none;
+}
+
+.wf-co-actions {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  display: flex;
+}
+
+@media screen and (max-width: 991px) {
+  .wf-co-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .wf-co-two {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- login (login.html) ---------- */
+
+.wf-login-outer {
+  width: 100%;
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 42px 0 84px;
+}
+
+.wf-login-card {
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 28px;
+  padding: 42px 36px;
+}
+
+.wf-login-brand {
+  text-decoration: none;
+  color: #333;
+  justify-content: center;
+  display: flex;
+}
+
+.wf-login-brand .text-block-2 {
+  font-size: 22px;
+}
+
+.wf-seg {
+  background-color: var(--seashell, #f9f4ef);
+  border: 1px solid #333;
+  border-radius: 100px;
+  padding: 4px;
+  display: flex;
+}
+
+.wf-seg-btn {
+  color: #333;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: 100px;
+  flex: 1;
+  height: 42px;
+  padding: 0 12px 2px;
+  font-family: Moderat, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  transition: background-color .2s, color .2s;
+}
+
+.wf-seg-btn.wf-is-active {
+  background-color: #333;
+  color: #fff;
+}
+
+.wf-auth-panels {
+  position: relative;
+  overflow: hidden;
+}
+
+.wf-auth-panel[hidden] {
+  display: none;
+}
+
+.wf-auth-row {
+  justify-content: flex-end;
+  margin: -6px 0 18px;
+  display: flex;
+}
+
+.wf-auth-small {
+  color: #333;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.wf-btn-full {
+  width: 100%;
+  cursor: pointer;
+}
+
+.wf-auth-notice {
+  color: #333;
+  text-align: center;
+  background-color: var(--coral, #ff8d5e);
+  border: 1px solid #333;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 140%;
+  overflow: hidden;
+}
+
+.wf-auth-notice[hidden] {
+  display: none;
+}
+
+.wf-or {
+  color: #333;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+}
+
+.wf-or::before,
+.wf-or::after {
+  content: "";
+  background-color: #333;
+  opacity: .25;
+  flex: 1;
+  height: 1px;
+}
+
+.wf-auth-terms {
+  color: #333;
+  text-align: center;
+  opacity: .75;
+  margin-top: 18px;
+  margin-bottom: 0;
+  font-size: 12px;
+  line-height: 165%;
+}
+
+.wf-auth-terms a {
+  color: #333;
+}
+
+@media screen and (max-width: 479px) {
+  .wf-login-card {
+    padding: 32px 22px;
+  }
+
+  .wf-login-outer {
+    padding-top: 24px;
+    padding-bottom: 64px;
+  }
+}
+
+/* ---------- motion micro-polish (buttery pass) ---------- */
+
+/* Pill buttons: soft lift on hover, gentle press on click.
+   (Template .button carries no transition of its own — safe to layer here.) */
+.button,
+.button.secondary {
+  transition:
+    transform .35s cubic-bezier(.22, 1, .36, 1),
+    background-color .3s,
+    color .3s;
+}
+
+.button:hover,
+.button.secondary:hover {
+  transform: translateY(-2px);
+}
+
+.button:active,
+.button.secondary:active {
+  transform: translateY(0) scale(.985);
+}
+
+/* Small interactive pills/rows ease instead of snapping */
+.wf-chip {
+  transition: background-color .3s, color .3s;
+}
+
+.wf-filter-chip {
+  transition:
+    background-color .3s,
+    color .3s,
+    transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+
+.wf-filter-chip:hover {
+  transform: translateY(-1px);
+}
+
+.wf-qty-btn,
+.wf-partner-row,
+.wf-cart-remove,
+.wf-search-close,
+.wf-partners-trigger {
+  transition: background-color .25s, color .25s;
+}
+
+/* Card imagery drifts on hover — scoped to .wf-card ONLY (template data-w-id
+   cards keep their own Webflow IX2 machinery). .div-block-85 clips overflow. */
+.wf-card img {
+  transition: transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+
+.wf-card:hover img {
+  transform: scale(1.03);
+}
+
+/* Layered frosted search overlay (falls back to solid seashell) */
+@supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+  .wf-search-overlay {
+    background-color: rgba(249, 244, 239, .82);
+    -webkit-backdrop-filter: blur(10px) saturate(1.4);
+    backdrop-filter: blur(10px) saturate(1.4);
+  }
+}
+
+/* Visible keyboard focus for the controls styled in this file.
+   (.wf-search-input is deliberately absent: the overlay's search bar shows
+   only its blinking caret — text inputs always match :focus-visible, so the
+   ring would otherwise box the input every time the overlay opens.) */
+.button:focus-visible,
+.wf-qty-btn:focus-visible,
+.wf-qty-input:focus-visible,
+.wf-partners-trigger:focus-visible,
+.wf-partner-row:focus-visible,
+.wf-cart-remove:focus-visible,
+.wf-search-close:focus-visible,
+.wf-shop-search:focus-visible,
+.wf-filter-chip:focus-visible,
+.wf-seg-btn:focus-visible,
+.wf-btn-full:focus-visible,
+.wf-input:focus-visible,
+.wf-select:focus-visible,
+.wf-textarea:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-view-cue,
+  .wf-filter-chip,
+  .wf-seg-btn,
+  .button,
+  .button.secondary,
+  .wf-chip,
+  .wf-qty-btn,
+  .wf-partner-row,
+  .wf-cart-remove,
+  .wf-search-close,
+  .wf-partners-trigger,
+  .wf-partners-caret,
+  .wf-card img,
+  .wf-search-card-media img {
+    transition: none;
+  }
+
+  .button:hover,
+  .button.secondary:hover,
+  .button:active,
+  .button.secondary:active,
+  .wf-filter-chip:hover,
+  .wf-card:hover img {
+    transform: none;
+  }
+}
+
+/* ---------- integration fixes (post-verification) ---------- */
+
+/* Webflow IX2 re-applies opacity:0 to dynamic-list grids at runtime and its
+   scroll trigger is unreliable now that Finsweet's loader is gone — keep the
+   grids visible; per-card hover interactions are untouched. */
+.w-dyn-items {
+  opacity: 1 !important;
+}
+
+/* webflow.js injects its badge at runtime; the static anchors were removed. */
+.w-webflow-badge {
+  display: none !important;
+}
+
+/* Product hero reuses .grid-2, whose fixed 540px height fits the home hero but
+   not the taller product info column — let it grow, never shrink.
+   Also drop the template's black hairline between the photo and the info
+   panel (it comes from the 1px column gap over a #000 grid background plus
+   the panel's left border). */
+.wf-pdp-grid {
+  height: auto;
+  min-height: 540px;
+  grid-column-gap: 0px;
+  background-color: transparent;
+}
+
+.wf-pdp-grid > .div-block-76 {
+  border-left-style: none;
+}
+
+/* .section centers its children; .div-block-90 has no width of its own, so
+   sections whose grids hold fewer cards shrink-wrap and float centered.
+   Normalize to the full-width rendering the template's own sections have. */
+.section > .div-block-90 {
+  width: 100%;
+}
+
+/* Brand logo mark (logo-icon.png) — replaces the "Wefeasto" wordmark in the nav,
+   footer and login card. Transparent black line-art, so it floats with no tile
+   and reads cleanly on both the seashell chrome and the coral footer. */
+.wf-brand-logo {
+  display: block;
+  height: 68px;
+  width: auto;
+}
+
+.footer-section .wf-brand-logo {
+  height: 92px;
+}
+
+.wf-login-brand .wf-brand-logo {
+  height: 112px;
+  margin-inline: auto;
+}
+
+@media screen and (max-width: 767px) {
+  .wf-brand-logo {
+    height: 54px;
+  }
+
+  .footer-section .wf-brand-logo {
+    height: 72px;
+  }
+}
+
+/* ---------- recipe "make it even better" recommendation cards ---------- */
+.wf-recs-intro {
+  max-width: 640px;
+  color: #6f6459;
+}
+
+.wf-recs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.wf-rec-card {
+  background: #fffdfa;
+  border: 1px solid rgba(51, 40, 30, .14);
+  border-radius: 14px;
+  padding: 26px 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wf-rec-card h4 {
+  margin: 0;
+}
+
+.wf-rec-reason {
+  margin: 0;
+  color: #6f6459;
+  font-size: .95rem;
+  line-height: 1.55;
+}
+
+@media screen and (max-width: 767px) {
+  .wf-recs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- legal pages (terms.html / privacy.html) ----------
+   Long-form prose the template never had. Same language as the rest of the
+   kit: seashell/#333/Moderat, 1px #333 bordered cards, 100px pill controls,
+   coral accents. Prose column caps at ~760px for comfortable reading. */
+
+.wf-legal-outer {
+  width: 100%;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 96px;
+}
+
+/* Header meta line ("Last updated …") */
+.wf-legal-meta {
+  color: #333;
+  opacity: .6;
+  letter-spacing: .3px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Cross-page segmented control (Terms | Privacy) — mirrors .wf-seg, links */
+.wf-legal-tabs {
+  background-color: var(--seashell, #f9f4ef);
+  border: 1px solid #333;
+  border-radius: 100px;
+  gap: 4px;
+  padding: 4px;
+  display: inline-flex;
+}
+
+.wf-legal-tab {
+  color: #333;
+  border-radius: 100px;
+  align-items: center;
+  height: 42px;
+  padding: 0 24px 2px;
+  font-family: Moderat, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  display: inline-flex;
+  transition: background-color .25s, color .25s;
+}
+
+.wf-legal-tab:hover {
+  background-color: #fff;
+}
+
+.wf-legal-tab.wf-is-active,
+.wf-legal-tab.wf-is-active:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Disclaimer note — subtle bordered card (not a loud banner) */
+.wf-legal-note {
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 16px;
+  padding: 16px 20px;
+  font-size: 13px;
+  line-height: 165%;
+}
+
+.wf-legal-note strong {
+  font-weight: 700;
+}
+
+/* Table of contents — bordered card like .wf-summary, two columns */
+.wf-toc {
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 24px;
+  padding: 28px 32px;
+}
+
+.wf-toc-title {
+  color: #333;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.wf-toc-list {
+  columns: 2;
+  column-gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wf-toc-item {
+  break-inside: avoid;
+}
+
+.wf-toc-link {
+  color: #333;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-decoration: none;
+  display: flex;
+}
+
+.wf-toc-num {
+  color: var(--coral, #ff8d5e);
+  flex: none;
+  width: 22px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.wf-toc-link:hover .wf-toc-text {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Prose body */
+.wf-legal {
+  color: #333;
+}
+
+.wf-legal-section {
+  scroll-margin-top: 96px;
+  padding: 6px 0;
+}
+
+.wf-legal-section + .wf-legal-section {
+  border-top: 1px solid rgba(51, 51, 51, .14);
+  margin-top: 26px;
+  padding-top: 30px;
+}
+
+.wf-legal h2 {
+  align-items: baseline;
+  gap: 12px;
+  margin: 0 0 14px;
+  font-size: 24px;
+  line-height: 130%;
+  display: flex;
+}
+
+.wf-legal-num {
+  color: var(--coral, #ff8d5e);
+  flex: none;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.wf-legal h3 {
+  margin: 22px 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 150%;
+}
+
+.wf-legal p {
+  margin: 0 0 14px;
+  font-size: 16px;
+  line-height: 172%;
+}
+
+.wf-legal ul,
+.wf-legal ol {
+  margin: 0 0 14px;
+  padding-left: 22px;
+}
+
+.wf-legal li {
+  margin-bottom: 8px;
+  padding-left: 4px;
+  font-size: 16px;
+  line-height: 168%;
+}
+
+.wf-legal li::marker {
+  color: var(--coral, #ff8d5e);
+}
+
+.wf-legal a {
+  color: #333;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.wf-legal strong {
+  font-weight: 700;
+}
+
+.wf-legal code {
+  background-color: var(--seashell, #f9f4ef);
+  border: 1px solid rgba(51, 51, 51, .25);
+  border-radius: 6px;
+  padding: 1px 7px;
+  font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+  font-size: 13px;
+}
+
+.wf-legal p:last-child,
+.wf-legal ul:last-child,
+.wf-legal ol:last-child {
+  margin-bottom: 0;
+}
+
+/* Closing contact callout — coral panel + dark pill button (home-hero idiom) */
+.wf-legal-cta {
+  background-color: var(--coral, #ff8d5e);
+  border: 1px solid #333;
+  border-radius: 24px;
+  padding: 40px;
+}
+
+.wf-legal-cta h2 {
+  margin: 0 0 10px;
+  font-size: 26px;
+  line-height: 120%;
+}
+
+.wf-legal-cta p {
+  margin: 0 0 24px;
+  max-width: 46ch;
+  font-size: 16px;
+  line-height: 160%;
+}
+
+.wf-legal-cta-actions {
+  flex-wrap: wrap;
+  gap: 12px;
+  display: flex;
+}
+
+.wf-legal-tab:focus-visible,
+.wf-toc-link:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-legal-tab {
+    transition: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .wf-toc-list {
+    columns: 1;
+  }
+
+  .wf-legal-cta {
+    padding: 28px 24px;
+  }
+
+  .wf-legal h2 {
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .wf-legal-tabs {
+    width: 100%;
+  }
+
+  .wf-legal-tab {
+    flex: 1;
+    justify-content: center;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}

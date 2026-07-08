@@ -1,0 +1,86 @@
+.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}
+
+
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+
+
+
+
+@media only screen and (min-width: 992px) {
+
+.track-horizontal-alt {
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee-horizontal-alt 40s linear infinite;
+  /* manipulate the speed of the marquee by changing "40s" line above*/
+	}
+
+@keyframes marquee-horizontal-alt {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0%); }
+	}
+}
+@media only screen and (max-width: 992px) {
+
+.track-horizontal-alt {
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee-horizontal-alt 10s linear infinite;
+  /* manipulate the speed of the marquee by changing "40s" line above*/
+	}
+
+@keyframes marquee-horizontal-alt {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0%); }
+	}
+}
+
+
+
+
+
+iframe {
+		height: 100%;
+    width: 100%;
+    border-width: 0px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+    border: 0;
+    border: none;
+    min-height: 0px;
+    min-width: 0px;
+    background: transparent;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+    height: 0px;
+    width: 0px;
+    background-color:;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: transparent; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: transparent; 
+}
+   
