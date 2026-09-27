@@ -5,8 +5,11 @@
  */
 import { chromium } from 'playwright';
 
-const ORIG = { name: 'orig', base: 'http://localhost:8000', toUrl: (p) => (p === '/' ? '/index.html' : p + '.html') };
-const PORT = { name: 'port', base: 'http://localhost:4173', toUrl: (p) => p };
+// WF_ORIG_URL / WF_PORT_URL repoint the two sides; WF_ORIG_CLEAN=1 when the "original" side serves clean URLs
+// (e.g. a baseline build). The maintained guard is tools/regression.mjs (npm run test:regression).
+const ORIG_CLEAN = process.env.WF_ORIG_CLEAN === '1';
+const ORIG = { name: 'orig', base: process.env.WF_ORIG_URL || 'http://localhost:8000', toUrl: (p) => (ORIG_CLEAN ? p : p === '/' ? '/index.html' : p + '.html') };
+const PORT = { name: 'port', base: process.env.WF_PORT_URL || 'http://localhost:4173', toUrl: (p) => p };
 
 const scaleOf = (t) => {
 	// computed transform matrix(a, b, c, d, e, f) → a (scaleX); 'none' → 1

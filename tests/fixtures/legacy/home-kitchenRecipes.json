@@ -1,0 +1,46 @@
+[
+  {
+    "url": "/recipes/wf-berry-overnight-steel-cut-oats",
+    "aria": "Open recipe: Berry Overnight Steel-Cut Oats",
+    "image": "/images/wefeasto/recipe-berry-overnight-steel-cut-oats.jpg",
+    "alt": "Jar of overnight steel-cut oats layered with fresh berries",
+    "cat": "Breakfast",
+    "title": "Berry Overnight Steel-Cut Oats",
+    "iconColor": "#ff8d5e",
+    "iconSrc": "/images/626aeef4f317e035c740e924_heart_fill_20_2_.svg",
+    "iconAlt": "Breakfast category heart icon"
+  },
+  {
+    "url": "/recipes/wf-muesli-yogurt-parfait",
+    "aria": "Open recipe: 5-Minute Muesli Yogurt Parfait",
+    "image": "/images/wefeasto/recipe-muesli-yogurt-parfait.jpg",
+    "alt": "Muesli yogurt parfait layered in a glass with fresh fruit",
+    "cat": "Breakfast",
+    "title": "5-Minute Muesli Yogurt Parfait",
+    "iconColor": "#ff8d5e",
+    "iconSrc": "/images/626aeef4f317e035c740e924_heart_fill_20_2_.svg",
+    "iconAlt": "Breakfast category heart icon"
+  },
+  {
+    "url": "/recipes/wf-choco-flakes-energy-bars",
+    "aria": "Open recipe: No-Bake Choco Flakes Energy Bars",
+    "image": "/images/wefeasto/recipe-choco-flakes-energy-bars.jpg",
+    "alt": "Stack of no-bake choco flakes energy bars",
+    "cat": "Kids",
+    "title": "No-Bake Choco Flakes Energy Bars",
+    "iconColor": "#d498eb",
+    "iconSrc": "/images/626aeeee73f41522db4989fb_hamburger_fill.svg",
+    "iconAlt": "Kids category hamburger icon"
+  },
+  {
+    "url": "/recipes/wf-health-mix-smoothie-bowl",
+    "aria": "Open recipe: Health Mix Banana Smoothie Bowl",
+    "image": "/images/wefeasto/recipe-health-mix-smoothie-bowl.jpg",
+    "alt": "Health mix banana smoothie bowl topped with fruit and nuts",
+    "cat": "Breakfast",
+    "title": "Health Mix Banana Smoothie Bowl",
+    "iconColor": "#ff8d5e",
+    "iconSrc": "/images/626aeef4f317e035c740e924_heart_fill_20_2_.svg",
+    "iconAlt": "Breakfast category heart icon"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "url": "/products/cornflakes",
+    "aria": "View Cornflakes",
+    "image": "/images/wefeasto/product-cornflakes.jpg",
+    "alt": "Bowl of Wefeasto Cornflakes with cold milk",
+    "cat": "Flakes",
+    "priceLine": "₹175 · 120 cal",
+    "title": "Cornflakes",
+    "starLine": "★ 5.0 · 500 g"
+  },
+  {
+    "url": "/products/steel-cut-oats",
+    "aria": "View Steel-Cut Oats",
+    "image": "/images/wefeasto/product-steel-cut-oats.jpg",
+    "alt": "Warm bowl of Wefeasto Steel-Cut Oats porridge topped with fruit",
+    "cat": "Oats",
+    "priceLine": "₹135 · 80 cal",
+    "title": "Steel-Cut Oats",
+    "starLine": "★ 4.3 · 500 g"
+  },
+  {
+    "url": "/products/muesli",
+    "aria": "View Muesli",
+    "image": "/images/wefeasto/product-muesli.jpg",
+    "alt": "Wefeasto Muesli with toasted grains, nuts and dried fruit",
+    "cat": "Muesli",
+    "priceLine": "₹250 · 100 cal",
+    "title": "Muesli",
+    "starLine": "★ 4.0 · 400 g"
+  },
+  {
+    "url": "/products/choco-flakes",
+    "aria": "View Choco's",
+    "image": "/images/wefeasto/product-choco-flakes.jpg",
+    "alt": "Bowl of Wefeasto Choco's chocolate flakes with milk",
+    "cat": "Flakes",
+    "priceLine": "₹200 · 120 cal",
+    "title": "Choco's",
+    "starLine": "★ 4.5 · 250 g"
+  }
+]

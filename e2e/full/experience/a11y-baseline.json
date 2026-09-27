@@ -1,0 +1,47 @@
+{
+ "tags": [
+  "wcag2a",
+  "wcag2aa",
+  "wcag21a",
+  "wcag21aa"
+ ],
+ "generatedFrom": "pre-Phase-2 baseline build",
+ "pages": {
+  "home": [],
+  "shop": [],
+  "pdp": [],
+  "cart": [],
+  "checkout": [],
+  "login": [],
+  "search": [
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": [
+     {
+      "target": ".wf-search-card:nth-child(1) > .wf-search-card-meta > .wf-search-card-cat",
+      "html": "<span class=\"wf-search-card-cat\">Desserts</span>",
+      "summary": "Fix any of the following:   Element has insufficient color contrast of 3.39 (foreground color: #837974, background color: #fae1d5, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": ".wf-search-card[href$=\"steel-cut-oats\"]:nth-child(2) > .wf-search-card-meta > .wf-search-card-cat",
+      "html": "<span class=\"wf-search-card-cat\">Oats</span>",
+      "summary": "Fix any of the following:   Element has insufficient color contrast of 3.39 (foreground color: #837974, background color: #fae1d5, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": ".wf-search-card:nth-child(5) > .wf-search-card-meta > .wf-search-card-cat",
+      "html": "<span class=\"wf-search-card-cat\">Breakfast</span>",
+      "summary": "Fix any of the following:   Element has insufficient color contrast of 3.59 (foreground color: #82807e, background color: #f9f4ef, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1"
+     },
+     {
+      "target": ".wf-search-card:nth-child(6) > .wf-search-card-meta > .wf-search-card-cat",
+      "html": "<span class=\"wf-search-card-cat\">Breakfast</span>",
+      "summary": "Fix any of the following:   Element has insufficient color contrast of 3.59 (foreground color: #82807e, background color: #f9f4ef, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1"
+     }
+    ]
+   }
+  ],
+  "checkout-errors": []
+ }
+}

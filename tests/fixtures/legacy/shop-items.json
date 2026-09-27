@@ -1,0 +1,80 @@
+[
+  {
+    "slug": "cornflakes",
+    "name": "Cornflakes",
+    "category": "Flakes",
+    "terms": "corn flakes corn flakes cereal breakfast chivda",
+    "image": "/images/wefeasto/product-cornflakes.jpg",
+    "alt": "Bowl of Wefeasto Cornflakes with milk",
+    "viewAria": "View Cornflakes",
+    "priceLine": "₹175 · 120 cal",
+    "starsAria": "Rated 5 out of 5",
+    "starsRating": "5",
+    "pack": "500 g"
+  },
+  {
+    "slug": "steel-cut-oats",
+    "name": "Steel-Cut Oats",
+    "category": "Oats",
+    "terms": "oats steel cut oatmeal porridge overnight oats breakfast",
+    "image": "/images/wefeasto/product-steel-cut-oats.jpg",
+    "alt": "Bowl of Wefeasto Steel-Cut Oats porridge",
+    "viewAria": "View Steel-Cut Oats",
+    "priceLine": "₹135 · 80 cal",
+    "starsAria": "Rated 4.3 out of 5",
+    "starsRating": "4.3",
+    "pack": "500 g"
+  },
+  {
+    "slug": "rolled-oats",
+    "name": "Rolled Oats",
+    "category": "Oats",
+    "terms": "rolled oats oats oatmeal porridge overnight oats quick oats breakfast",
+    "image": "/images/wefeasto/product-rolled-oats.jpg",
+    "alt": "Top-down bowl of Wefeasto Rolled Oats with banana and berries",
+    "viewAria": "View Rolled Oats",
+    "priceLine": "₹125 · 90 cal",
+    "starsAria": "Rated 4.4 out of 5",
+    "starsRating": "4.4",
+    "pack": "500 g"
+  },
+  {
+    "slug": "muesli",
+    "name": "Muesli",
+    "category": "Muesli",
+    "terms": "muesli granola cereal nuts fruit parfait breakfast",
+    "image": "/images/wefeasto/product-muesli.jpg",
+    "alt": "Bowl of Wefeasto Muesli with nuts and fruit",
+    "viewAria": "View Muesli",
+    "priceLine": "₹250 · 100 cal",
+    "starsAria": "Rated 4 out of 5",
+    "starsRating": "4",
+    "pack": "400 g"
+  },
+  {
+    "slug": "choco-flakes",
+    "name": "Choco's",
+    "category": "Flakes",
+    "terms": "choco chocos chocolate choco flakes kids cereal",
+    "image": "/images/wefeasto/product-choco-flakes.jpg",
+    "alt": "Bowl of Wefeasto Choco's chocolate flakes with milk",
+    "viewAria": "View Choco's",
+    "priceLine": "₹200 · 120 cal",
+    "starsAria": "Rated 4.5 out of 5",
+    "starsRating": "4.5",
+    "pack": "250 g"
+  },
+  {
+    "slug": "health-mix",
+    "name": "Health Mix",
+    "category": "Mix",
+    "terms": "health mix multigrain millet ragi sathu maavu porridge smoothie",
+    "image": "/images/wefeasto/product-health-mix.jpg",
+    "alt": "Glass of Wefeasto Health Mix multigrain porridge",
+    "viewAria": "View Health Mix",
+    "priceLine": "₹270 · 120 cal",
+    "starsAria": "Rated 5 out of 5",
+    "starsRating": "5",
+    "pack": null
+  }
+]

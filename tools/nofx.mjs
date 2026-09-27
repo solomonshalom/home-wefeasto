@@ -4,7 +4,7 @@
  */
 import { chromium } from 'playwright';
 
-const BASE = 'http://localhost:4173';
+const BASE = process.env.WF_PORT_URL || 'http://localhost:4173'; // maintained guard: tools/regression.mjs
 const browser = await chromium.launch();
 
 async function probe(label, ctxOpts, url) {

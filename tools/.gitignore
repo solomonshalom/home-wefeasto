@@ -1,0 +1,4 @@
+# tool deps (tools/package.json) and generated output of the legacy scripts
+node_modules/
+domdiff-out/
+visual-out/

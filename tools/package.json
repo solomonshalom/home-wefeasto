@@ -1,0 +1,15 @@
+{
+  "name": "wefeasto-tools",
+  "private": true,
+  "type": "module",
+  "description": "Standalone verification + regression tools (not part of the app build). Deps live in tools/node_modules (gitignored); the root package.json dependencies are untouched.",
+  "scripts": {
+    "regression": "node regression.mjs"
+  },
+  "dependencies": {
+    "cheerio": "1.2.0",
+    "pixelmatch": "7.2.0",
+    "playwright": "1.62.0",
+    "pngjs": "7.0.0"
+  }
+}

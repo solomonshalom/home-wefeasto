@@ -1,0 +1,1098 @@
+{
+  "$comment": "Intended Phase 2 differences between the original storefront (baseline commit) and the working tree. Every entry needs a reason. Format: tools/README.md. Anything that differs and is not listed here fails `npm run test:regression`.",
+  "baseline": {
+    "commit": "2f60a63"
+  },
+  "dom": {
+    "newPages": [
+      {
+        "page": "404.html",
+        "reason": "S9 branded 404 (ui-kit): prerendered /404, served by the static host for unknown URLs"
+      },
+      {
+        "page": "order.html",
+        "reason": "M3 /order?no=&t= shell (storefront-checkout): client-rendered order status page"
+      },
+      {
+        "page": "account.html",
+        "reason": "S3 /account shell (storefront-account)"
+      },
+      {
+        "page": "reset-password.html",
+        "reason": "S3 /reset-password?token= (storefront-account)"
+      },
+      {
+        "page": "shipping.html",
+        "optional": true,
+        "reason": "M7 policy pages render only once the owner publishes them (storefront-account)"
+      },
+      {
+        "page": "refunds.html",
+        "optional": true,
+        "reason": "M7 policy pages render only once the owner publishes them (storefront-account)"
+      },
+      {
+        "page": "grievances.html",
+        "optional": true,
+        "reason": "M7 policy pages render only once the owner publishes them (storefront-account)"
+      }
+    ],
+    "removedPages": [],
+    "skipPages": [],
+    "rules": [
+      {
+        "id": "head-phase2-css",
+        "pages": [
+          "**"
+        ],
+        "side": "current",
+        "selector": "head link[rel=stylesheet][href$='wf-checkout.css'], head link[rel=stylesheet][href$='wf-account.css']",
+        "reason": "app.html loads the Phase 2 stylesheets after wefeasto.css (storefront-checkout / storefront-account)"
+      },
+      {
+        "id": "head-noscript-menu",
+        "pages": [
+          "**"
+        ],
+        "side": "current",
+        "selector": "head noscript:contains('wf-menu-btn')",
+        "reason": "ui-kit: hamburger hidden without JS (it needs JS to open the sheet)"
+      },
+      {
+        "id": "head-noscript-peepstrip",
+        "pages": [
+          "**"
+        ],
+        "side": "current",
+        "selector": "head noscript:contains('wf-peepwalk')",
+        "reason": "ui-kit: PeepStrip band hidden without JS"
+      },
+      {
+        "id": "head-referrer-login",
+        "pages": [
+          "login.html"
+        ],
+        "side": "current",
+        "selector": "head meta[name=referrer][content=no-referrer]",
+        "reason": "storefront-account: /login?verify=<token> carries a token in the URL; never leak it via Referer"
+      },
+      {
+        "id": "head-razorpay-preconnect",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "current",
+        "selector": "head link[rel=preconnect][href='https://checkout.razorpay.com']",
+        "reason": "storefront-checkout: checkout.js is loaded on Pay; preconnect in the /checkout head"
+      },
+      {
+        "id": "nav-hamburger",
+        "pages": [
+          "**"
+        ],
+        "side": "current",
+        "selector": "#wf-menu-btn, .wf-menu-sep",
+        "reason": "ui-kit MobileNav: hamburger (<=991px) + separator in the nav icon row; there was no mobile navigation"
+      },
+      {
+        "id": "mobile-nav-host",
+        "pages": [
+          "**"
+        ],
+        "side": "current",
+        "selector": "#wf-mobile-nav.wf-mnav-host",
+        "reason": "ui-kit MobileNav: fixed sheet host outside .page-wrapper"
+      },
+      {
+        "id": "peepstrip",
+        "pages": [
+          "**"
+        ],
+        "exceptPages": [
+          "checkout.html",
+          "login.html"
+        ],
+        "side": "current",
+        "selector": "canvas.wf-peepwalk",
+        "reason": "M9 PeepStrip (1:1 bublr crowd, 350px) between the page and the footer (hidden on /checkout, /login, /order, /reset-password)"
+      },
+      {
+        "id": "colormix-pill-hidden",
+        "pages": [
+          "cart.html",
+          "checkout.html"
+        ],
+        "side": "baseline",
+        "selector": "button.wf-colormix",
+        "reason": "ui-kit: the Mix colors pill is not rendered on /cart, /checkout, /order (it covered the order summary / pay button)"
+      },
+      {
+        "id": "home-hero-img",
+        "pages": [
+          "index.html"
+        ],
+        "side": "both",
+        "action": "ignore-attrs",
+        "attrs": [
+          "loading",
+          "fetchpriority"
+        ],
+        "selector": "img.image-4[src$='hero.jpg']",
+        "reason": "M8 quick fix: LCP hero image eager + fetchpriority=high (was loading=lazy)"
+      },
+      {
+        "id": "home-newsletter-anchor",
+        "pages": [
+          "index.html"
+        ],
+        "side": "current",
+        "action": "ignore-attrs",
+        "attrs": [
+          "id"
+        ],
+        "selector": ".div-block-101#newsletter",
+        "reason": "M6: #newsletter anchor for links/emails"
+      },
+      {
+        "id": "home-newsletter-state",
+        "pages": [
+          "index.html"
+        ],
+        "side": "current",
+        "action": "ignore-attrs",
+        "attrs": [
+          "data-wf-nl-state"
+        ],
+        "selector": "#email-form-2",
+        "reason": "M6 newsletter via Payload: state hook for tests"
+      },
+      {
+        "id": "home-newsletter-honeypot",
+        "pages": [
+          "index.html"
+        ],
+        "side": "current",
+        "selector": "#email-form-2 .wf-hp",
+        "reason": "M6: honeypot field (bots), visually hidden"
+      },
+      {
+        "id": "home-newsletter-method",
+        "pages": [
+          "index.html"
+        ],
+        "side": "both",
+        "action": "ignore-attrs",
+        "attrs": [
+          "method"
+        ],
+        "selector": "#email-form-2",
+        "reason": "hunt client-ux prehydration-forms-native-submit: Webflow's method=get \u2192 post, so a native submit can never put the email address in a URL"
+      },
+      {
+        "id": "home-newsletter-submit-prehydration",
+        "pages": [
+          "index.html"
+        ],
+        "side": "current",
+        "action": "ignore-attrs",
+        "attrs": [
+          "disabled"
+        ],
+        "selector": "#email-form-2 input[type=\"submit\"]",
+        "reason": "hunt client-ux prehydration-forms-native-submit: Submit disabled until hydrated (a native submit before that subscribed nobody), like /checkout's Pay"
+      },
+      {
+        "id": "home-newsletter-done-copy",
+        "pages": [
+          "index.html"
+        ],
+        "side": "both",
+        "action": "ignore-text",
+        "selector": "#email-form-2 ~ .w-form-done > div, .w-form-done:has(~ .w-form-fail) > div",
+        "reason": "M6 double opt-in: success copy is now 'Check your inbox to confirm\u2026'"
+      },
+      {
+        "id": "pdp-eyebrow-category",
+        "pages": [
+          "products/*.html"
+        ],
+        "side": "both",
+        "action": "ignore-text",
+        "selector": ".text-block-3",
+        "reason": "ui-kit / M8: PDP eyebrow shows the product's own category (was hard-coded 'Oats & Muesli' on every PDP)"
+      },
+      {
+        "id": "pdp-perks",
+        "pages": [
+          "products/*.html"
+        ],
+        "side": "current",
+        "selector": "p.wf-perks[data-wf-perks]",
+        "reason": "S7 buy-direct perks line"
+      },
+      {
+        "id": "pdp-facts",
+        "pages": [
+          "products/*.html"
+        ],
+        "side": "current",
+        "selector": "details.wf-facts",
+        "optional": true,
+        "reason": "M7 product facts <details> after PartnersDropdown (only facts that exist)"
+      },
+      {
+        "id": "recipe-rail-add",
+        "pages": [
+          "recipes/*.html"
+        ],
+        "side": "current",
+        "selector": "a.wf-rail-add[data-wf-add]",
+        "reason": "S10 recipe rail: one-tap add of the featured product"
+      },
+      {
+        "id": "add-to-cart-button-role",
+        "pages": [
+          "**"
+        ],
+        "side": "current",
+        "action": "ignore-attrs",
+        "attrs": [
+          "role"
+        ],
+        "selector": "a[data-wf-add]",
+        "reason": "hunt client-ux add-to-cart-is-a-link (sf-core): the Webflow <a href=\"#\"> Add to Cart acts and never navigates, so it is exposed as role=button (WCAG 4.1.2) and Space adds like a native button; same element, classes and hooks"
+      },
+      {
+        "id": "login-notice-copy",
+        "pages": [
+          "login.html"
+        ],
+        "side": "both",
+        "action": "ignore-text",
+        "selector": "#wf-auth-notice",
+        "reason": "S3: the prototype notice 'accounts arrive in Phase 2' is gone (notice starts empty)"
+      },
+      {
+        "id": "login-panels",
+        "pages": [
+          "login.html"
+        ],
+        "side": "both",
+        "action": "ignore-children",
+        "selector": "#wf-auth-panels",
+        "reason": "S3 real accounts: panels are now forms with forgot-password panel, hints, busy states (storefront-account \u00a72); covered by e2e/ui/account.spec.js"
+      },
+      {
+        "id": "login-google-hidden",
+        "pages": [
+          "login.html"
+        ],
+        "side": "baseline",
+        "selector": ".wf-or, a.wf-google",
+        "reason": "SPEC \u00a70: 'Continue with Google' hidden until OAuth exists"
+      },
+      {
+        "id": "checkout-fields-fieldset",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "current",
+        "action": "unwrap",
+        "selector": "fieldset.wf-co-fields[data-wf-co-fields]",
+        "reason": "hunt client-ux (sf-checkout, round 4): the customer fields sit in a <fieldset> that is disabled while the payment window opens, so edits can't be silently ignored"
+      },
+      {
+        "id": "checkout-field-limits",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "both",
+        "action": "ignore-attrs",
+        "attrs": [
+          "maxlength",
+          "inputmode"
+        ],
+        "selector": "#wf-co-name, #wf-co-phone, #wf-co-address, #wf-co-city",
+        "reason": "M2: server-matching length limits and mobile keyboards on the checkout fields"
+      },
+      {
+        "id": "checkout-pin-spaced",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "both",
+        "action": "ignore-attrs",
+        "attrs": [
+          "maxlength"
+        ],
+        "selector": "#wf-co-pin",
+        "reason": "hunt client-ux pin-with-space-truncated (sf-checkout): maxlength 7 so a PIN typed as printed (\"560 001\") fits; the space is dropped before validation"
+      },
+      {
+        "id": "checkout-phone-placeholder",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "both",
+        "action": "ignore-attrs",
+        "attrs": [
+          "placeholder"
+        ],
+        "selector": "#wf-co-phone",
+        "reason": "M2: phone is a 10-digit Indian mobile (+91 added by the page)"
+      },
+      {
+        "id": "checkout-new-fields",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "current",
+        "selector": ".wf-field:has(> #wf-co-email), .wf-field:has(> #wf-co-state), label[for=wf-co-consent], label[for=wf-co-save]",
+        "reason": "M2 email + state + consent, S1 save details (storefront-checkout \u00a75)"
+      },
+      {
+        "id": "checkout-pin-before-city",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "both",
+        "action": "sort-children",
+        "selector": ".wf-co-two:has(#wf-co-pin)",
+        "reason": "S5: PIN first so city/state can autofill from it"
+      },
+      {
+        "id": "checkout-no-card-upi-inputs",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "baseline",
+        "selector": "#wf-pay-upi, #wf-pay-card, #wf-checkout-form .wf-form-note:has(> small)",
+        "reason": "SPEC \u00a70: card and UPI data never in our forms; the 'Prototype \u2014 no real payment' note is gone"
+      },
+      {
+        "id": "checkout-trust-line",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "current",
+        "selector": "[data-wf-trust], #wf-checkout-form noscript",
+        "reason": "M2 trust line + WhatsApp help (S12); no-JS note"
+      },
+      {
+        "id": "checkout-pay-button",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "current",
+        "action": "ignore-attrs",
+        "attrs": [
+          "data-wf-pay-state",
+          "disabled"
+        ],
+        "selector": "#wf-place-order",
+        "reason": "M2 amount-in-button Pay: disabled until hydrated/quoted"
+      },
+      {
+        "id": "checkout-pay-button-class",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "current",
+        "action": "ignore-classes",
+        "classes": [
+          "wf-pay-btn"
+        ],
+        "selector": "#wf-place-order",
+        "reason": "M2 Pay button styling hook"
+      },
+      {
+        "id": "home-video-frame",
+        "pages": [
+          "index.html"
+        ],
+        "side": "current",
+        "action": "ignore-classes",
+        "classes": [
+          "wf-video-frame"
+        ],
+        "selector": "#video .wf-reveal",
+        "reason": "PI-EXP-4: the trailer's wrapper clips its scroll parallax (scale 1.06 \u2192 1) so it can't widen the page; same 16:9 geometry, the 1px border moved from the <video> to the frame"
+      },
+      {
+        "id": "checkout-pay-button-label",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "both",
+        "action": "ignore-text",
+        "selector": "#wf-place-order",
+        "reason": "M2: 'Place Order' \u2192 'Pay securely' (prerendered, no amount: never 'Pay \u20b90')"
+      },
+      {
+        "id": "checkout-fake-thanks-removed",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "baseline",
+        "selector": "#wf-co-thanks",
+        "reason": "M3: the fake 'Order confirmed' block moved to /order (real order status)"
+      }
+    ]
+  },
+  "visual": {
+    "$comment": "JS-off screenshots. rules: mode 'hide' = display:none (intended additions/removals; layout collapses back), 'mask' = visibility:hidden (changed in place, layout kept). thresholds: maxDiffRatio per page/viewport (default 0.001 = 0.1% of pixels).",
+    "viewports": [
+      "desktop",
+      "mobile"
+    ],
+    "skipPages": [],
+    "rules": [
+      {
+        "id": "v-home-newsletter-submit",
+        "pages": [
+          "index.html"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": "#email-form-2 input[type=submit]",
+        "reason": "hunt client-ux prehydration-forms-native-submit: newsletter Submit stays disabled until hydrated, so with JS off it shows dimmed (opacity .8)"
+      },
+      {
+        "id": "v-pdp-perks",
+        "pages": [
+          "products/*.html"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": "p.wf-perks",
+        "reason": "S7 perks line (addition)"
+      },
+      {
+        "id": "v-pdp-facts",
+        "pages": [
+          "products/*.html"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": "details.wf-facts",
+        "reason": "M7 product facts (addition)"
+      },
+      {
+        "id": "v-pdp-eyebrow",
+        "pages": [
+          "products/*.html"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": ".text-block-3",
+        "reason": "PDP eyebrow = the product's own category (text changed)"
+      },
+      {
+        "id": "v-recipe-rail-add",
+        "pages": [
+          "recipes/*.html"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": "a.wf-rail-add",
+        "reason": "S10 recipe rail add button (addition)"
+      },
+      {
+        "id": "v-colormix-pill",
+        "pages": [
+          "cart.html",
+          "checkout.html"
+        ],
+        "side": "baseline",
+        "mode": "hide",
+        "selector": "button.wf-colormix",
+        "reason": "Mix colors pill not rendered on /cart, /checkout (ui-kit)"
+      },
+      {
+        "id": "v-colormix-footer-room",
+        "pages": [
+          "**"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": ".footer-section::after",
+        "reason": "hunt w5 client-ux colormix-covers-footer-social: wherever the Mix colors pill is rendered, the footer ends with a band as tall as the pill's footprint (52px, 58px below 480px) so the fixed pill no longer covers the Instagram/YouTube icons and legal line at the end of the page; hiding the band restores the baseline layout (measured in e2e/ui/colormix-footer.spec.js)"
+      },
+      {
+        "id": "v-login-panels",
+        "pages": [
+          "login.html"
+        ],
+        "side": "both",
+        "mode": "hide",
+        "selector": "#wf-auth-panels",
+        "reason": "S3 real account forms (DOM-allow-listed; covered by e2e/ui/account.spec.js)"
+      },
+      {
+        "id": "v-login-google",
+        "pages": [
+          "login.html"
+        ],
+        "side": "baseline",
+        "mode": "hide",
+        "selector": ".wf-or, a.wf-google",
+        "reason": "'Continue with Google' hidden until OAuth exists"
+      },
+      {
+        "id": "v-checkout-new-fields",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": ".wf-field:has(> #wf-co-email), .wf-field:has(> #wf-co-state), label[for=wf-co-consent], label[for=wf-co-save], [data-wf-trust], #wf-checkout-form noscript",
+        "reason": "M2 email/state/consent, S1 save, trust line, no-JS note (additions)"
+      },
+      {
+        "id": "v-checkout-removed-inputs",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "baseline",
+        "mode": "hide",
+        "selector": "#wf-pay-upi, #wf-pay-card, #wf-checkout-form .wf-form-note:has(> small)",
+        "reason": "card/UPI inputs and the prototype note removed (SPEC \u00a70)"
+      },
+      {
+        "id": "v-checkout-pin-city",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": ".wf-co-two:has(#wf-co-pin)",
+        "reason": "S5: PIN and City swapped"
+      },
+      {
+        "id": "v-checkout-phone",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": "#wf-co-phone",
+        "reason": "phone placeholder changed (10-digit mobile)"
+      },
+      {
+        "id": "v-checkout-pay",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": "#wf-place-order",
+        "reason": "Pay button: 'Place Order' \u2192 'Pay securely', disabled until ready"
+      },
+      {
+        "id": "v-webclip-avatar",
+        "pages": [
+          "**"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": "img[src$='webclip.png']",
+        "reason": "M7 / ui-kit: static/images/webclip.png is now the Wefeasto mark (was Webflow's logo); it is the recipe author avatar on recipe pages and the home recipe cards"
+      },
+      {
+        "id": "v-video-frames",
+        "pages": [
+          "**"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": "video",
+        "reason": "autoplaying (muted) videos play without JS too and are captured at a random frame; the <video> element, poster and sources are compared by the dom phase"
+      },
+      {
+        "id": "v-video-frame-border",
+        "pages": [
+          "index.html"
+        ],
+        "side": "current",
+        "mode": "mask",
+        "selector": ".wf-video-frame",
+        "reason": "PI-EXP-4: the home trailer's 1px border is drawn by its clipping frame now, not by the (masked) <video>; masking the frame covers the same 16:9 box the baseline masks"
+      },
+      {
+        "id": "v-home-our-story-phone",
+        "pages": [
+          "index.html"
+        ],
+        "viewports": [
+          "mobile"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": "#about",
+        "reason": "hunt r4 a11y-motion mobile-nav-our-story: #about (\"Our Story\") is shown below 480px now (webflow.css hid it), so the mobile menu's, hero's and footer's /#about links land on it; the baseline has no section there, so the current side hides it and the rest of the page must still match"
+      }
+    ],
+    "thresholds": []
+  },
+  "interact": {
+    "$comment": "Observations that differ on purpose. Each entry pins the value on each side (a key absent on one side is null). Every other observation must be identical.",
+    "expected": {
+      "coSummaryRows": {
+        "baseline": [
+          "Cornflakes \u00d7 2\u20b9350",
+          "Health Mix \u00d7 1\u20b9270",
+          "Subtotal\u20b9620",
+          "Total\u20b9620"
+        ],
+        "current": [
+          "Cornflakes \u00d7 2\u20b9350",
+          "Health Mix \u00d7 1\u20b9270",
+          "Subtotal\u20b9620",
+          "DeliveryFREE",
+          "Total\u20b9620"
+        ],
+        "reason": "M1 honest totals: a Delivery row in every summary (free over \u20b9499)"
+      },
+      "coFakeThanksOnCheckout": {
+        "baseline": true,
+        "current": false,
+        "reason": "M3: no fake 'Order confirmed' on /checkout; confirmation lives on /order"
+      },
+      "coCardUpiInputs": {
+        "baseline": 3,
+        "current": 0,
+        "reason": "SPEC \u00a70: card/UPI data never in our forms (Razorpay collects it)"
+      },
+      "coNewFields": {
+        "baseline": [],
+        "current": [
+          "wf-co-email",
+          "wf-co-state",
+          "wf-co-consent",
+          "wf-co-save"
+        ],
+        "reason": "M2 email + state + consent, S1 save details"
+      },
+      "coPayLabel": {
+        "baseline": "Place Order",
+        "current": "Pay \u20b9620 securely",
+        "reason": "M2 amount-in-button Pay"
+      },
+      "coInvalidMarked": {
+        "baseline": null,
+        "current": true,
+        "reason": "M2: invalid fields get aria-invalid + inline errors (baseline relied on native validation)"
+      },
+      "coUpiPanelHidden": {
+        "baseline": true,
+        "current": null,
+        "reason": "UPI-ID panel removed (SPEC \u00a70)"
+      },
+      "coCodPayLabel": {
+        "baseline": null,
+        "current": "Place order \u00b7 Pay \u20b9620 on delivery",
+        "reason": "M2 COD label with amount"
+      },
+      "coPathAfterPlace": {
+        "baseline": "/checkout",
+        "current": "/order",
+        "reason": "M3: placing an order goes to /order?no=&t= (stubbed API)"
+      },
+      "coRequest": {
+        "baseline": null,
+        "current": {
+          "method": "cod",
+          "items": [
+            {
+              "slug": "cornflakes",
+              "qty": 2
+            },
+            {
+              "slug": "health-mix",
+              "qty": 1
+            }
+          ],
+          "phone": "+919845262777",
+          "email": "asha.regression@example.com",
+          "state": "Karnataka",
+          "pin": "560001",
+          "keyIsUuid": true,
+          "expectedTotalPaise": 62000
+        },
+        "reason": "M2: real POST /api/store/checkout (SPEC \u00a76 body, Idempotency-Key uuid v4, E.164 phone, server-checked total)"
+      },
+      "coOrderView": {
+        "baseline": null,
+        "current": "confirmed",
+        "reason": "M3 /order confirmed view from the (stubbed) status endpoint"
+      },
+      "coOrderMethod": {
+        "baseline": null,
+        "current": "cod",
+        "reason": "M3 method line on /order"
+      },
+      "noticeText": {
+        "baseline": "Prototype only \u2014 accounts arrive in Phase 2 \u2728",
+        "reason": "S3: the prototype notice is gone; the current text is the signup validation message (pinned via signupInvalidMarked)"
+      },
+      "signupInvalidMarked": {
+        "baseline": null,
+        "current": true,
+        "reason": "S3: empty signup is refused client-side with field errors"
+      },
+      "signupRequestSent": {
+        "baseline": null,
+        "current": false,
+        "reason": "S3: invalid signup never reaches /api/customers"
+      },
+      "noticeAutoHidden": {
+        "baseline": true,
+        "current": false,
+        "reason": "S3: error notices stay until the next action (the prototype notice auto-hid after 3 s)"
+      },
+      "googleButton": {
+        "baseline": 1,
+        "current": 0,
+        "reason": "SPEC \u00a70: 'Continue with Google' hidden until OAuth exists"
+      },
+      "newsletterRequest": {
+        "baseline": null,
+        "current": {
+          "email": "regression@example.com",
+          "website": ""
+        },
+        "reason": "M6: newsletter posts to /api/store/newsletter (honeypot 'website' empty), nothing goes to webflow.com"
+      },
+      "mixPillOnCart": {
+        "baseline": 1,
+        "current": 0,
+        "reason": "ui-kit: the Mix colors pill is not rendered on /cart, /checkout, /order (an active mix stays applied: mixStateOnCart must still match)"
+      }
+    },
+    "ignoreErrors": []
+  },
+  "nofx": {
+    "$comment": "Kill-switch probes (mode + page \u2192 {before, afterNav, errors}) must match the baseline unless pinned here: 'mode page': {current, reason}.",
+    "expected": {}
+  },
+  "smoke": {
+    "$comment": "JS-on page loads with no CMS: errors not seen on the same baseline page fail unless matched here ({pattern, reason}). Also fails on new horizontal overflow (scrollWidth > clientWidth) at any width.",
+    "widths": [
+      1280,
+      768,
+      390
+    ],
+    "ignoreErrors": []
+  },
+  "visualJs": {
+    "$comment": "JS on, ?nofx=1 + prefers-reduced-motion (deterministic, no intro animations), /api = no CMS. Covers client-rendered UI the JS-off pass can't see (cart rows, summaries, hydrated nav). targets: {page (build-relative, for rule globs), route, seed (localStorage), name}.",
+    "viewports": [
+      "desktop",
+      "mobile"
+    ],
+    "targets": [
+      {
+        "page": "index.html",
+        "route": "/",
+        "name": "home"
+      },
+      {
+        "page": "shop.html",
+        "route": "/shop",
+        "name": "shop"
+      },
+      {
+        "page": "products/muesli.html",
+        "route": "/products/muesli",
+        "name": "pdp-muesli"
+      },
+      {
+        "page": "recipes/wf-banana-oat-pancakes.html",
+        "route": "/recipes/wf-banana-oat-pancakes",
+        "name": "recipe-pancakes"
+      },
+      {
+        "page": "cart.html",
+        "route": "/cart",
+        "seed": {
+          "wefeasto_cart": {
+            "cornflakes": 2,
+            "health-mix": 1
+          }
+        },
+        "name": "cart-free-delivery"
+      },
+      {
+        "page": "cart.html",
+        "route": "/cart",
+        "seed": {
+          "wefeasto_cart": {
+            "cornflakes": 1
+          }
+        },
+        "name": "cart-below-free"
+      },
+      {
+        "page": "checkout.html",
+        "route": "/checkout",
+        "seed": {
+          "wefeasto_cart": {
+            "cornflakes": 2,
+            "health-mix": 1
+          }
+        },
+        "name": "checkout-bag"
+      },
+      {
+        "page": "login.html",
+        "route": "/login",
+        "name": "login"
+      },
+      {
+        "page": "terms.html",
+        "route": "/terms",
+        "name": "terms"
+      }
+    ],
+    "rules": [
+      {
+        "id": "v-pdp-perks",
+        "pages": [
+          "products/*.html"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": "p.wf-perks",
+        "reason": "S7 perks line (addition)"
+      },
+      {
+        "id": "v-pdp-facts",
+        "pages": [
+          "products/*.html"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": "details.wf-facts",
+        "reason": "M7 product facts (addition)"
+      },
+      {
+        "id": "v-pdp-eyebrow",
+        "pages": [
+          "products/*.html"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": ".text-block-3",
+        "reason": "PDP eyebrow = the product's own category (text changed)"
+      },
+      {
+        "id": "v-recipe-rail-add",
+        "pages": [
+          "recipes/*.html"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": "a.wf-rail-add",
+        "reason": "S10 recipe rail add button (addition)"
+      },
+      {
+        "id": "v-colormix-pill",
+        "pages": [
+          "cart.html",
+          "checkout.html"
+        ],
+        "side": "baseline",
+        "mode": "hide",
+        "selector": "button.wf-colormix",
+        "reason": "Mix colors pill not rendered on /cart, /checkout (ui-kit)"
+      },
+      {
+        "id": "v-colormix-footer-room",
+        "pages": [
+          "**"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": ".footer-section::after",
+        "reason": "hunt w5 client-ux colormix-covers-footer-social: wherever the Mix colors pill is rendered, the footer ends with a band as tall as the pill's footprint (52px, 58px below 480px) so the fixed pill no longer covers the Instagram/YouTube icons and legal line at the end of the page; hiding the band restores the baseline layout (measured in e2e/ui/colormix-footer.spec.js)"
+      },
+      {
+        "id": "v-login-panels",
+        "pages": [
+          "login.html"
+        ],
+        "side": "both",
+        "mode": "hide",
+        "selector": "#wf-auth-panels",
+        "reason": "S3 real account forms (DOM-allow-listed; covered by e2e/ui/account.spec.js)"
+      },
+      {
+        "id": "v-login-google",
+        "pages": [
+          "login.html"
+        ],
+        "side": "baseline",
+        "mode": "hide",
+        "selector": ".wf-or, a.wf-google",
+        "reason": "'Continue with Google' hidden until OAuth exists"
+      },
+      {
+        "id": "v-checkout-new-fields",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": ".wf-field:has(> #wf-co-email), .wf-field:has(> #wf-co-state), label[for=wf-co-consent], label[for=wf-co-save], [data-wf-trust], #wf-checkout-form noscript",
+        "reason": "M2 email/state/consent, S1 save, trust line, no-JS note (additions)"
+      },
+      {
+        "id": "v-checkout-removed-inputs",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "baseline",
+        "mode": "hide",
+        "selector": "#wf-pay-upi, #wf-pay-card, #wf-checkout-form .wf-form-note:has(> small)",
+        "reason": "card/UPI inputs and the prototype note removed (SPEC \u00a70)"
+      },
+      {
+        "id": "v-checkout-pin-city",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": ".wf-co-two:has(#wf-co-pin)",
+        "reason": "S5: PIN and City swapped"
+      },
+      {
+        "id": "v-checkout-phone",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": "#wf-co-phone",
+        "reason": "phone placeholder changed (10-digit mobile)"
+      },
+      {
+        "id": "v-checkout-pay",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": "#wf-place-order",
+        "reason": "Pay button: 'Place Order' \u2192 'Pay securely', disabled until ready"
+      },
+      {
+        "id": "v-webclip-avatar",
+        "pages": [
+          "**"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": "img[src$='webclip.png']",
+        "reason": "M7 / ui-kit: static/images/webclip.png is now the Wefeasto mark (was Webflow's logo); it is the recipe author avatar on recipe pages and the home recipe cards"
+      },
+      {
+        "id": "vj-peepstrip",
+        "pages": [
+          "**"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": "canvas.wf-peepwalk",
+        "reason": "M9 PeepStrip (addition; its own specs cover it)"
+      },
+      {
+        "id": "vj-hamburger",
+        "pages": [
+          "**"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": "#wf-menu-btn, .wf-menu-sep",
+        "reason": "ui-kit hamburger (addition, <=991px)"
+      },
+      {
+        "id": "vj-delivery-row",
+        "pages": [
+          "cart.html",
+          "checkout.html"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": ".wf-summary-row:has(> [data-wf-delivery])",
+        "reason": "M1 honest totals: Delivery row in every summary (addition)"
+      },
+      {
+        "id": "vj-meter-topup",
+        "pages": [
+          "cart.html",
+          "checkout.html"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": ".wf-topup-block",
+        "reason": "M1 free-delivery meter + one-tap top-up (addition)"
+      },
+      {
+        "id": "vj-mobile-total",
+        "pages": [
+          "checkout.html"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": "[data-wf-mobile-total]",
+        "reason": "M2 total line above the form on phones (addition)"
+      },
+      {
+        "id": "vj-total-value",
+        "pages": [
+          "cart.html",
+          "checkout.html"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": "[data-wf-total], .wf-summary-total > span:last-child",
+        "reason": "M1: the total now includes the \u20b949 delivery fee under \u20b9499 (was subtotal only)"
+      },
+      {
+        "id": "vj-video-frames",
+        "pages": [
+          "**"
+        ],
+        "side": "both",
+        "mode": "mask",
+        "selector": "video",
+        "reason": "autoplaying videos are captured at a random frame (nondeterministic); the <video> element, poster and sources are compared by the dom phase"
+      },
+      {
+        "id": "vj-video-frame-border",
+        "pages": [
+          "index.html"
+        ],
+        "side": "current",
+        "mode": "mask",
+        "selector": ".wf-video-frame",
+        "reason": "PI-EXP-4: the home trailer's 1px border is drawn by its clipping frame now, not by the (masked) <video>; masking the frame covers the same 16:9 box the baseline masks"
+      },
+      {
+        "id": "vj-home-our-story-phone",
+        "pages": [
+          "index.html"
+        ],
+        "viewports": [
+          "mobile"
+        ],
+        "side": "current",
+        "mode": "hide",
+        "selector": "#about",
+        "reason": "hunt r4 a11y-motion mobile-nav-our-story: #about (\"Our Story\") is shown below 480px now (webflow.css hid it), so the mobile menu's, hero's and footer's /#about links land on it; the baseline has no section there, so the current side hides it and the rest of the page must still match"
+      }
+    ],
+    "thresholds": []
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "note": "Frozen copy of the pre-CMS catalog (data modules + hard-coded page arrays). Never regenerate from the adapters.",
+  "frozenAt": "2026-09-25T15:18:23.430Z",
+  "gitHead": "2f60a63ca871bb053fbc7ee59ea33928d923cec8",
+  "sources": {
+    "src/lib/data/products.js": "e772d75acd15e374cdef9b1f6c1e30a89460c8a24ec6881aef87538d7363c939",
+    "src/lib/data/products-content.js": "bc57a2092b9c64782c64193c53db5d33ed82136b5ff07be0248ed31ce636884a",
+    "src/lib/data/recipes-content.js": "187b3df5b59e19c0962c877d5c96f9fd15f7b9af5ca7e6ca151093018e716a2c",
+    "src/routes/+page.svelte": "e9f068d8b8ce90c38d57d1fbbd43116d6c5a002a1d2d170d354b580cdf9d14f7",
+    "src/routes/shop/+page.svelte": "de6bcccb43991bb19f541cbc4b34112459f377e92b1e97418abdf2405832d80d"
+  },
+  "files": [
+    "products.json",
+    "recipes.json",
+    "productsContent.json",
+    "recipesContent.json",
+    "home-bestsellers.json",
+    "home-kitchenRecipes.json",
+    "shop-items.json",
+    "formatINR.json",
+    "productBySlug.json"
+  ]
+}
