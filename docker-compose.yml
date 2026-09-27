@@ -1,0 +1,28 @@
+# Local infrastructure for Wefeasto development and tests.
+#   docker compose up -d
+# Postgres: postgres://wefeasto:wefeasto@127.0.0.1:54329/<db>  (dbs: wefeasto, wefeasto_test, wefeasto_e2e)
+# Mailpit:  SMTP 127.0.0.1:54325, web UI + API http://127.0.0.1:54326
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: wefeasto
+      POSTGRES_PASSWORD: wefeasto
+      POSTGRES_DB: wefeasto
+    ports:
+      - '127.0.0.1:54329:5432'
+    volumes:
+      - wefeasto-pg:/var/lib/postgresql/data
+      - ./docker/postgres-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U wefeasto']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  mail:
+    image: axllent/mailpit:latest
+    ports:
+      - '127.0.0.1:54325:1025'
+      - '127.0.0.1:54326:8025'
+volumes:
+  wefeasto-pg:

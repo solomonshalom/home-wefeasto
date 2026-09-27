@@ -1,0 +1,61 @@
+{
+  "name": "wefeasto-cms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Wefeasto commerce backend — Payload CMS 3 + Next.js (catalog, customers, orders, payments)",
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev -p 3000",
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start -p 3000",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "typecheck:build": "tsc -p tsconfig.build.json --noEmit",
+    "test": "npm run test:unit && npm run test:int",
+    "test:unit": "cross-env NODE_OPTIONS=--no-deprecation vitest run --project unit",
+    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --project int",
+    "test:prod-smoke": "node scripts/prod-smoke.mjs",
+    "smoke:razorpay": "node scripts/razorpay-live-smoke.mjs",
+    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "migrate": "cross-env NODE_OPTIONS=--no-deprecation payload migrate",
+    "migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
+    "migrate:status": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:status",
+    "check:migrations": "node scripts/check-migrations.mjs",
+    "build:deploy": "npm run migrate && npm run build",
+    "seed": "cross-env NODE_OPTIONS=--no-deprecation tsx src/seed/index.ts"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "3.90.2",
+    "@payloadcms/email-nodemailer": "3.90.2",
+    "@payloadcms/next": "3.90.2",
+    "@payloadcms/richtext-lexical": "3.90.2",
+    "@payloadcms/storage-vercel-blob": "3.90.2",
+    "@payloadcms/ui": "3.90.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "16.4.7",
+    "graphql": "^16.8.1",
+    "next": "16.3.6",
+    "payload": "3.90.2",
+    "razorpay": "2.9.8",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "sharp": "0.35.4"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.9",
+    "@types/pg": "8.20.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "msw": "2.15.0",
+    "pg": "8.20.0",
+    "tsx": "4.22.4",
+    "typescript": "5.7.3",
+    "vite-tsconfig-paths": "6.0.5",
+    "vitest": "4.0.18"
+  },
+  "engines": {
+    "node": "^18.20.2 || >=20.9.0"
+  }
+}

@@ -1,0 +1,23 @@
+-- Separate databases so integration tests and e2e runs never touch dev data.
+CREATE DATABASE wefeasto_test OWNER wefeasto;
+CREATE DATABASE wefeasto_e2e OWNER wefeasto;
+CREATE DATABASE wefeasto_pay_test OWNER wefeasto;
+CREATE DATABASE wefeasto_ret_test OWNER wefeasto;
+CREATE DATABASE wefeasto_sf_test OWNER wefeasto;
+CREATE DATABASE wefeasto_verify_test OWNER wefeasto;
+CREATE DATABASE wefeasto_acct_test OWNER wefeasto;
+CREATE DATABASE wefeasto_e2e_0 OWNER wefeasto;
+CREATE DATABASE wefeasto_e2e_1 OWNER wefeasto;
+CREATE DATABASE wefeasto_e2e_2 OWNER wefeasto;
+CREATE DATABASE wefeasto_e2e_3 OWNER wefeasto;
+CREATE DATABASE wefeasto_e2e_4 OWNER wefeasto;
+CREATE DATABASE wefeasto_hunt_0_test OWNER wefeasto;
+CREATE DATABASE wefeasto_hunt_1_test OWNER wefeasto;
+CREATE DATABASE wefeasto_hunt_2_test OWNER wefeasto;
+CREATE DATABASE wefeasto_hunt_3_test OWNER wefeasto;
+CREATE DATABASE wefeasto_hunt_4_test OWNER wefeasto;
+CREATE DATABASE wefeasto_hunt_5_test OWNER wefeasto;
+CREATE DATABASE wefeasto_hunt_6_test OWNER wefeasto;
+CREATE DATABASE wefeasto_hunt_7_test OWNER wefeasto;
+CREATE DATABASE wefeasto_hunt_8_test OWNER wefeasto;
+CREATE DATABASE wefeasto_hunt_9_test OWNER wefeasto;

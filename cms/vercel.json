@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "crons": [
+    { "path": "/api/payments/reconcile", "schedule": "*/5 * * * *" },
+    { "path": "/api/payload-jobs/run?queue=default&limit=50", "schedule": "*/5 * * * *" }
+  ]
+}

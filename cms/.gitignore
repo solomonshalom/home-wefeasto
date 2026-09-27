@@ -1,0 +1,39 @@
+# Wefeasto CMS (Payload + Next.js)
+
+# dependencies
+/node_modules
+
+# next.js build output
+/.next/
+/out/
+/build
+next-env.d.ts
+
+# typescript
+*.tsbuildinfo
+
+# env files: .env holds local secrets; only the example is committed
+.env
+.env.*
+!.env.example
+
+# local media uploads (production uses Vercel Blob)
+/media
+
+# test artefacts
+/coverage
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+*.log
+
+# misc
+.DS_Store
+*.pem
+.vercel
+AGENTS.md
+CLAUDE.md
+
+# per-instance build dirs (NEXT_DIST_DIR)
+/.next-*
