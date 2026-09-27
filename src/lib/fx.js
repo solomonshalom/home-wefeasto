@@ -210,15 +210,19 @@ function initReveals() {
 	onCleanup(() => window.gsap.set(els, { clearProps: 'all' }));
 }
 
+// The page intro fades with opacity, never autoAlpha: visibility:hidden would
+// take the <h1> out of the accessibility tree and make it unfocusable for the
+// first ~0.4 s, so a keyboard user whose banner/row/chip goes away during the
+// intro (focus.js moves focus to the heading) would land on <body>.
 function initHero() {
 	if (!motionOK()) return;
 	$all('.wf-hero-stagger').forEach((hero) => {
 		const kids = Array.prototype.slice.call(hero.children).filter(safeToAnimate);
 		if (!kids.length) return;
-		window.gsap.set(kids, { y: 24, autoAlpha: 0 });
+		window.gsap.set(kids, { y: 24, opacity: 0 });
 		window.gsap.to(kids, {
 			y: 0,
-			autoAlpha: 1,
+			opacity: 1,
 			duration: 1.0,
 			ease: 'expo.out',
 			stagger: 0.11,

@@ -1,0 +1,450 @@
+/*
+ * Wefeasto Phase 2 — account styles (additive; loaded after wefeasto.css).
+ * Palette colours must be written as literals (#ff8d5e, #ffc33a, #d499eb,
+ * #2cdb69, #f9f4ef, #fff6e7, #ffdede, #fffdfa) or var(--coral|--plum|
+ * --lime-green|--seashell) so the "Mix colors" shuffle can remap them.
+ *
+ * Covers: /login + /reset-password (auth card additions), /account, the
+ * home newsletter form (honeypot, busy spinner), the CMS policy pages.
+ * Content never starts hidden here; motion lives in JS (motionOK()).
+ */
+
+/* ---------- shared bits ---------- */
+
+/* Spinner inside a pill button (.button is display:flex) */
+.button > .wf-spinner {
+  margin-right: 8px;
+}
+
+.button[disabled],
+.button[aria-busy="true"] {
+  cursor: default;
+}
+
+.button[disabled] {
+  opacity: .8;
+}
+
+.wf-input[aria-invalid="true"] {
+  border-color: #333;
+  box-shadow: 0 0 0 2px var(--coral, #ff8d5e);
+}
+
+.wf-input.wf-input-readonly,
+.wf-input[readonly] {
+  background-color: var(--seashell, #f9f4ef);
+  cursor: default;
+}
+
+/* The "(optional)" hint: a softer grey, not opacity. `opacity: .6` on the
+   #333 label gave 3.69:1 on white (WCAG 1.4.3 needs 4.5:1); #595959 is
+   7:1 on white and 6.4:1 on seashell. */
+.wf-label-soft {
+  color: #595959;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
+/* ---------- /login + /reset-password ---------- */
+
+.wf-auth-notice.wf-is-ok {
+  background-color: var(--lime-green, #2cdb69);
+}
+
+/* "Forgot password?" / "Back to log in" are actions: buttons that look like the old link */
+button.wf-auth-link {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: Moderat, sans-serif;
+  line-height: inherit;
+}
+
+button.wf-auth-link:focus-visible,
+.wf-auth-row a.wf-auth-small:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
+/* "Send the link again" under the notice (unverified login, after signing up) */
+.wf-auth-resend {
+  color: #333;
+  text-align: center;
+  margin: -6px 0 18px;
+  font-size: 12px;
+  line-height: 160%;
+}
+
+.wf-auth-resend button.wf-auth-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 24px;
+  vertical-align: middle;
+}
+
+.wf-auth-resend button.wf-auth-link[disabled] {
+  cursor: default;
+  text-decoration: none;
+  opacity: .8;
+}
+
+.wf-auth-row.wf-auth-row-center {
+  justify-content: center;
+  margin: 18px 0 0;
+}
+
+.wf-auth-lead {
+  color: #333;
+  margin: 0 0 18px;
+  font-size: 14px;
+  line-height: 160%;
+}
+
+.wf-auth-hint {
+  margin: 8px 0 0 24px;
+  opacity: .75;
+}
+
+.wf-reset-title {
+  text-align: center;
+  margin: 0;
+  font-size: 26px;
+  line-height: 120%;
+}
+
+/* ---------- /account ---------- */
+
+.wf-account {
+  width: 100%;
+  padding-bottom: 84px;
+}
+
+.wf-account-wait {
+  color: #333;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 24px 0;
+  font-size: 16px;
+  display: flex;
+}
+
+.wf-account-problem {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 0 24px;
+  display: flex;
+}
+
+.wf-account-problem p {
+  margin: 0;
+}
+
+.wf-account-hello {
+  margin: 0 0 32px;
+}
+
+.wf-account-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  grid-column-gap: 42px;
+  grid-row-gap: 42px;
+  align-items: start;
+  width: 100%;
+}
+
+.wf-account-h {
+  margin: 0 0 16px;
+  font-size: 24px;
+  line-height: 120%;
+}
+
+.wf-account-actions {
+  flex-wrap: wrap;
+  gap: 12px;
+  display: flex;
+}
+
+.wf-account-empty {
+  border-top: 1px solid rgba(51, 51, 51, .18);
+  padding: 32px 0;
+}
+
+.wf-account-empty .p-large {
+  margin: 0;
+}
+
+/* Order rows: the bag-line look (.wf-cart-row) without being a bag line */
+.wf-order-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(51, 51, 51, .18);
+}
+
+.wf-order-row {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) auto;
+  grid-template-areas:
+    "thumb info total"
+    "thumb status actions";
+  grid-column-gap: 24px;
+  grid-row-gap: 12px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(51, 51, 51, .18);
+}
+
+.wf-order-row .wf-cart-thumb {
+  align-self: start;
+}
+
+.wf-order-row .wf-cart-info p {
+  margin: 0;
+}
+
+.wf-order-row .wf-cart-name {
+  font-size: 18px;
+}
+
+.wf-order-row .wf-cart-unit {
+  overflow-wrap: anywhere;
+}
+
+/* "Placed <date>": a softer grey, not opacity (as .wf-label-soft). Faded #333
+   rides on whatever surface is behind it: 4.43:1 on blush, which the colour
+   mix puts on the page in every S4/S5/S6 combo. #595959 is not a palette
+   colour, so the mix leaves it alone: 5.59:1 on blush, 6.41:1 on seashell. */
+.wf-order-date {
+  color: #595959;
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+.wf-order-status {
+  grid-area: status;
+  justify-self: start;
+  white-space: normal;
+  text-align: left;
+  height: auto;
+  min-height: 26px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background-color: var(--seashell, #f9f4ef);
+}
+
+.wf-order-status[data-tone="good"] {
+  background-color: var(--lime-green, #2cdb69);
+}
+
+.wf-order-status[data-tone="wait"] {
+  background-color: #ffc33a;
+}
+
+.wf-order-status[data-tone="bad"] {
+  background-color: #ffdede;
+}
+
+.wf-order-total {
+  grid-area: total;
+  justify-self: end;
+}
+
+.wf-order-actions {
+  grid-area: actions;
+  justify-self: end;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  display: flex;
+}
+
+.wf-order-actions .button {
+  height: 42px;
+  padding-left: 18px;
+  padding-right: 18px;
+  font-size: 14px;
+  margin-top: 0;
+}
+
+/* Details card: the summary-card look */
+.wf-account-details {
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 24px;
+  width: 100%;
+  padding: 32px;
+}
+
+.wf-account-note {
+  color: #333;
+  min-height: 1.4em;
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 140%;
+}
+
+.wf-account-note:empty {
+  margin: 0;
+  min-height: 0;
+}
+
+.wf-account-note[data-tone="error"] {
+  background-color: var(--coral, #ff8d5e);
+  border: 1px solid #333;
+  border-radius: 14px;
+  padding: 10px 14px;
+}
+
+.wf-account-note[data-tone="ok"] {
+  font-weight: 700;
+}
+
+.wf-account-out {
+  border-top: 1px solid rgba(51, 51, 51, .18);
+  margin-top: 24px;
+  padding-top: 24px;
+}
+
+.wf-account-out .wf-account-note {
+  margin: 12px 0 0;
+}
+
+@media screen and (max-width: 991px) {
+  .wf-account-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .wf-order-row {
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "thumb info total"
+      "thumb status status"
+      "actions actions actions";
+    grid-column-gap: 16px;
+  }
+
+  .wf-order-actions {
+    justify-self: stretch;
+    flex-wrap: nowrap;
+  }
+
+  .wf-order-actions .button {
+    flex: 1 1 0;
+    height: 44px;
+    white-space: nowrap;
+  }
+
+  .wf-account-details {
+    padding: 24px 20px;
+  }
+}
+
+/* Phone button pairs: Webflow sizes .button and .button.secondary differently
+   at <=479px; pin both (as ui-kit's .wf-mnav-actions does). */
+@media screen and (max-width: 479px) {
+  .wf-account .button,
+  .wf-policy .wf-legal-cta-actions .button {
+    height: 44px;
+    font-size: 14px;
+    margin-top: 0;
+  }
+}
+
+/* ---------- home newsletter ("Stay Crunchy") ---------- */
+
+/* The confirm/unsubscribe redirects land on /#newsletter: clear the sticky
+   nav. +page.svelte's landOnNewsletter() reads this value when it re-lands. */
+#newsletter {
+  scroll-margin-top: 96px;
+}
+
+/* Honeypot: off-screen, not display:none (some bots skip hidden fields) */
+.wf-hp {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Busy spinner: sits over the end of the email field, takes no width */
+.wf-nl-spinner {
+  z-index: 1;
+  color: #333;
+  flex: none;
+  align-self: center;
+  width: 20px;
+  height: 20px;
+  margin: 0 12px 0 -32px;
+  font-size: 20px;
+  line-height: 0;
+  position: relative;
+}
+
+/* ---------- CMS policy pages (/shipping, /refunds, /grievances, …) ---------- */
+
+.wf-legal-tabs.wf-policy-tabs {
+  flex-wrap: wrap;
+  border-radius: 26px;
+  max-width: 100%;
+}
+
+.wf-legal-tabs.wf-policy-tabs .wf-legal-tab {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.wf-policy-body > :first-child {
+  margin-top: 0;
+}
+
+.wf-policy-card-title {
+  margin: 0 0 12px;
+  font-size: 18px;
+  line-height: 130%;
+}
+
+.wf-policy-dl {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  grid-column-gap: 18px;
+  grid-row-gap: 8px;
+  margin: 0;
+  font-size: 14px;
+}
+
+.wf-policy-dl dt {
+  font-weight: 700;
+}
+
+.wf-policy-dl dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.wf-policy-dl a {
+  color: #333;
+}
+
+@media screen and (max-width: 479px) {
+  .wf-policy-dl {
+    grid-template-columns: 1fr;
+    grid-row-gap: 2px;
+  }
+
+  .wf-policy-dl dd + dt {
+    margin-top: 8px;
+  }
+}

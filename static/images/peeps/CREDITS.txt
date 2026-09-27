@@ -1,0 +1,16 @@
+Open Peeps crowd sprite sheet
+=============================
+
+characters.png
+  Artwork: Open Peeps by Pablo Stanley — https://www.openpeeps.com
+  Licence: CC0 1.0 (public domain dedication; free for commercial use).
+
+  characters.png is bublr's public/images/characters.png, byte for byte
+  (SHA-1 7a79dc800d0bb0ca67d4abe9e76914e7748eabeb, 380,568 B) — the sheet
+  published with "Crowd Simulator" by Szenia Zadvornykh,
+  https://codepen.io/zadvorsky/pen/xxwbBQV (public CodePen code, MIT licence).
+  15 across x 7 down, 240 x 324 px cells.
+
+
+The animation in src/lib/components/PeepWalk.svelte is a 1:1 port of
+bublr/src/components/PeepWalk.js (credited in that file's header comment).

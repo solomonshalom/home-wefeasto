@@ -1,0 +1,540 @@
+/*
+ * Wefeasto Phase 2 — checkout styles (additive; loaded after wefeasto.css).
+ * Palette colours must be written as literals (#ff8d5e, #ffc33a, #d499eb,
+ * #2cdb69, #f9f4ef, #fff6e7, #ffdede, #fffdfa) or var(--coral|--plum|
+ * --lime-green|--seashell) so the "Mix colors" shuffle can remap them.
+ *
+ * Owner: storefront-checkout — /checkout, /order, the pending-order banner.
+ */
+
+/* ---------- small shared bits ---------- */
+
+.wf-link-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  color: #333;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  background: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+.wf-link-btn:disabled,
+.wf-link-btn[aria-disabled="true"] {
+  cursor: default;
+  opacity: .5;
+}
+
+.wf-link-btn:focus-visible,
+.wf-co-note-btn:focus-visible,
+.wf-pending-close:focus-visible,
+.wf-co-issue-btn:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
+/* ---------- form fields ---------- */
+
+.wf-field-error {
+  color: #333;
+  background-color: #ffdede;
+  border-radius: 8px;
+  margin: 8px 0 0;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 150%;
+  display: inline-block;
+}
+
+.wf-input[aria-invalid="true"],
+.wf-select[aria-invalid="true"],
+.wf-textarea[aria-invalid="true"] {
+  box-shadow: 0 0 0 2px #ff8d5e;
+}
+
+/* Checkbox rows (marketing consent, save my details): .wf-form-note type. */
+.wf-check {
+  cursor: pointer;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 12px 0 0;
+  font-size: 13px;
+  display: flex;
+}
+
+.wf-check input {
+  accent-color: #333;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+}
+
+.wf-co-save {
+  margin: 0 0 16px;
+}
+
+.wf-co-saved {
+  background-color: #fff6e7;
+  border-radius: 16px;
+  margin: 0 0 20px;
+  padding: 10px 14px;
+  font-size: 13px;
+}
+
+.wf-pin-hint {
+  margin: -6px 0 16px;
+}
+
+/* Solid grey, not opacity: faded #333 is 4.43:1 on blush (colour mix S4-S6). */
+.wf-pin-credit {
+  color: #595959;
+  white-space: nowrap;
+}
+
+.wf-pin-credit a {
+  color: inherit;
+}
+
+/* ---------- the details + payment method, locked while an order is being placed ---------- */
+
+.wf-co-fields {
+  min-width: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.wf-co-fields:disabled .wf-pay-pill {
+  cursor: progress;
+}
+
+/* ---------- payment pills, trust line ---------- */
+
+.wf-pay-pill.wf-pill-off {
+  cursor: not-allowed;
+  opacity: .45;
+}
+
+.wf-co-cod-reason {
+  margin: -8px 0 12px;
+}
+
+.wf-co-trust {
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  display: flex;
+}
+
+.wf-co-trust a {
+  color: inherit;
+  font-weight: 700;
+}
+
+/* ---------- notes: failed payment, errors, recovery ---------- */
+
+.wf-co-note {
+  color: #333;
+  background-color: #fff6e7;
+  border-left: 3px solid #333;
+  border-radius: 0 16px 16px 0;
+  margin: 0 0 20px;
+  padding: 12px 16px;
+}
+
+.wf-co-note:focus {
+  outline: none;
+}
+
+.wf-co-note:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
+.wf-co-note-text {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 145%;
+}
+
+.wf-co-note-actions {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 10px;
+  display: flex;
+}
+
+.wf-chip.wf-co-note-btn {
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  border-radius: 100px;
+  gap: 8px;
+  transition: background-color .25s, color .25s;
+}
+
+.wf-chip.wf-co-note-btn:hover {
+  color: #fff;
+  background-color: #333;
+}
+
+.wf-chip.wf-co-note-btn:disabled {
+  cursor: progress;
+  opacity: .6;
+}
+
+.wf-co-note-help {
+  color: #333;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ---------- pay button ---------- */
+
+.button.wf-pay-btn {
+  gap: 10px;
+  width: 100%;
+}
+
+.button.wf-pay-btn:disabled {
+  cursor: not-allowed;
+  opacity: .45;
+}
+
+.button.wf-pay-btn[aria-busy="true"] {
+  cursor: progress;
+  opacity: 1;
+}
+
+.wf-co-blocked {
+  background-color: #ffdede;
+  border-radius: 8px;
+  margin: 0 0 12px;
+  padding: 6px 10px;
+}
+
+.wf-co-blocked a {
+  color: #333;
+  font-weight: 700;
+}
+
+/* One in-flow total above the button once the summary drops below the form. */
+.wf-co-mobile-total {
+  display: none;
+}
+
+@media screen and (max-width: 991px) {
+  .wf-co-mobile-total {
+    color: #333;
+    margin: 0 0 12px;
+    font-size: 16px;
+    font-weight: 700;
+    display: block;
+  }
+}
+
+/* ---------- summary (server quote) ---------- */
+
+.wf-summary.wf-loading > :not(.wf-summary-heading):not(.wf-summary-divider) {
+  opacity: .55;
+  transition: opacity .2s;
+}
+
+.wf-co-issue {
+  padding: 4px 0 8px;
+}
+
+.wf-co-issue .wf-summary-row > span:first-child {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.wf-co-issue-mark {
+  opacity: .5;
+}
+
+.wf-co-issue-actions {
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  display: flex;
+}
+
+.wf-chip.wf-co-issue-btn {
+  cursor: pointer;
+  font-family: inherit;
+  border-radius: 100px;
+}
+
+.wf-chip.wf-co-issue-btn:hover {
+  color: #fff;
+  background-color: #333;
+}
+
+.wf-co-discount {
+  font-weight: 700;
+}
+
+/* ---------- pending-order banner (cart + checkout) ---------- */
+
+.wf-pending {
+  color: #333;
+  border: 1px dashed #333;
+  border-radius: 16px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 28px;
+  padding: 8px 8px 8px 16px;
+  font-size: 14px;
+  line-height: 150%;
+  display: flex;
+}
+
+.wf-pending-text {
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin: 0;
+  display: flex;
+}
+
+.wf-pending-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.wf-pending-stuck {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 0;
+}
+
+.wf-pending-stuck .wf-co-note {
+  margin: 10px 0 0;
+}
+
+.wf-pending-close {
+  appearance: none;
+  -webkit-appearance: none;
+  color: #333;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-family: Moderat, sans-serif;
+  font-size: 18px;
+  line-height: 1;
+  display: inline-flex;
+}
+
+.wf-pending-close:hover {
+  border-color: #333;
+}
+
+/* ---------- /order ---------- */
+
+.wf-order {
+  width: 100%;
+}
+
+.wf-order-peeps {
+  margin: 0 0 8px;
+}
+
+.wf-order-state {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 0 56px;
+}
+
+.wf-order-wait {
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.wf-order-state .wf-co-actions .button,
+.wf-co-thanks .wf-co-actions .button {
+  margin-top: 0;
+}
+
+/* failed page: "Watching for a late confirmation from your bank…" */
+.wf-order-late {
+  margin-top: 12px;
+}
+
+.wf-order .wf-co-thanks {
+  padding-top: 16px;
+}
+
+.wf-order-state .button.wf-pay-btn {
+  width: auto;
+  min-width: 200px;
+}
+
+.wf-order-state .wf-form-note a,
+.wf-order-state .wf-link-btn {
+  color: #333;
+  font-weight: 700;
+}
+
+/* Two recipe cards, centred under their heading (the grid is three-up). */
+@media screen and (min-width: 480px) {
+  .grid-6.wf-order-recipe-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.wf-order-title {
+  margin-bottom: 0;
+}
+
+.wf-order-squiggle {
+  justify-content: center;
+  margin-top: 4px;
+  display: flex;
+}
+
+.wf-order-squiggle svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.wf-order-promise {
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+
+.wf-order-receipt {
+  text-align: left;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* /order: the order an earlier, unheard tap had already placed (flow.js kept it; changes since aren't in it) */
+.wf-co-note.wf-order-kept {
+  text-align: left;
+  max-width: 480px;
+  margin: 20px auto 0;
+}
+
+.wf-order-kept .wf-co-note-text + .wf-co-note-text {
+  margin-top: 6px;
+}
+
+.wf-order-kept .wf-order-kept-address {
+  font-weight: 700;
+}
+
+.wf-household {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.wf-household-q {
+  color: #333;
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.wf-household-pills {
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.wf-pay-pill.wf-household-pill {
+  font-family: inherit;
+  min-width: 56px;
+  padding: 0 18px;
+}
+
+.wf-pay-pill.wf-household-pill[aria-pressed="true"] {
+  color: #f9f4ef;
+  background-color: #333;
+}
+
+.wf-pay-pill.wf-household-pill:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
+/* Saving: aria-disabled, not disabled — the pressed pill keeps keyboard focus (WCAG 2.4.3). */
+.wf-pay-pill.wf-household-pill[aria-disabled="true"] {
+  cursor: progress;
+}
+
+.wf-order-account {
+  background-color: #fff6e7;
+  border: 1px solid #333;
+  border-radius: 24px;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.wf-order-account .p-large {
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+
+.wf-order-account .button {
+  margin-top: 0;
+}
+
+.wf-order-recipes-title {
+  text-align: center;
+  margin: 0;
+}
+
+@media screen and (max-width: 479px) {
+  .wf-pending {
+    align-items: flex-start;
+    padding-left: 12px;
+  }
+
+  .wf-order-state .wf-co-actions,
+  .wf-co-thanks .wf-co-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .wf-order-state .wf-co-actions .button,
+  .wf-co-thanks .wf-co-actions .button {
+    height: 44px;
+    font-size: 14px;
+  }
+
+  .wf-order-account {
+    padding: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-summary.wf-loading > :not(.wf-summary-heading):not(.wf-summary-divider),
+  .wf-chip.wf-co-note-btn {
+    transition: none;
+  }
+}

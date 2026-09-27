@@ -1,144 +1,172 @@
 <script>
-	import { tick } from 'svelte';
+	import { tick, onMount } from 'svelte';
+	import { replaceState } from '$app/navigation';
+	import { page } from '$app/state';
+	import { api } from '$lib/api.js';
+	import { track } from '$lib/track.js';
+	import { syncLenis } from '$lib/fx.js';
+	import Spinner from '$lib/components/Spinner.svelte';
+	import { homeBestsellers, kitchenRecipes as homeKitchenRecipes } from '$lib/data/catalog-views.js';
+	import YourUsual from '$lib/components/YourUsual.svelte';
+	import { liveCatalog, loadLive, withLivePrices, soldOutIn } from '$lib/live.js';
 
 	// Inline transform baked into the original markup — the hidden initial
 	// state of the card-hover machinery (Webflow IX2 useFirstGroupAsInitialState).
 	const HOVER_HIDDEN =
 		'transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;';
 
-	const bestsellers = [
-		{
-			url: '/products/cornflakes',
-			aria: 'View Cornflakes',
-			image: '/images/wefeasto/product-cornflakes.jpg',
-			alt: 'Bowl of Wefeasto Cornflakes with cold milk',
-			cat: 'Flakes',
-			priceLine: '₹175 · 120 cal',
-			title: 'Cornflakes',
-			starLine: '★ 5.0 · 500 g'
-		},
-		{
-			url: '/products/steel-cut-oats',
-			aria: 'View Steel-Cut Oats',
-			image: '/images/wefeasto/product-steel-cut-oats.jpg',
-			alt: 'Warm bowl of Wefeasto Steel-Cut Oats porridge topped with fruit',
-			cat: 'Oats',
-			priceLine: '₹135 · 80 cal',
-			title: 'Steel-Cut Oats',
-			starLine: '★ 4.3 · 500 g'
-		},
-		{
-			url: '/products/muesli',
-			aria: 'View Muesli',
-			image: '/images/wefeasto/product-muesli.jpg',
-			alt: 'Wefeasto Muesli with toasted grains, nuts and dried fruit',
-			cat: 'Muesli',
-			priceLine: '₹250 · 100 cal',
-			title: 'Muesli',
-			starLine: '★ 4.0 · 400 g'
-		},
-		{
-			url: '/products/choco-flakes',
-			aria: "View Choco's",
-			image: '/images/wefeasto/product-choco-flakes.jpg',
-			alt: "Bowl of Wefeasto Choco's chocolate flakes with milk",
-			cat: 'Flakes',
-			priceLine: '₹200 · 120 cal',
-			title: "Choco's",
-			starLine: '★ 4.5 · 250 g'
-		}
-	];
+	// Card lists derived from the CMS snapshot (src/lib/data/cms-snapshot.json):
+	// products and recipes flagged homeFeatured, in catalog order, with display
+	// strings ('₹175 · 120 cal', '★ 5.0 · 500 g') computed from pricePaise,
+	// rating and packSize. A price edit in the CMS reaches the prerendered cards
+	// on the next build, and the browser shows it at once: after the live
+	// catalog loads (onMount), the price lines are re-derived from it.
+	const bestsellers = homeBestsellers();
+	const kitchenRecipes = homeKitchenRecipes();
+	const liveCards = $derived(
+		$liveCatalog.ready
+			? new Map(homeBestsellers(withLivePrices).map((c) => [c.url, { priceLine: c.priceLine, soldOut: soldOutIn($liveCatalog, c.url.replace(/^\/products\//, '')) }]))
+			: null
+	);
+	onMount(() => {
+		loadLive();
+	});
 
-	const kitchenRecipes = [
-		{
-			url: '/recipes/wf-berry-overnight-steel-cut-oats',
-			aria: 'Open recipe: Berry Overnight Steel-Cut Oats',
-			image: '/images/wefeasto/recipe-berry-overnight-steel-cut-oats.jpg',
-			alt: 'Jar of overnight steel-cut oats layered with fresh berries',
-			cat: 'Breakfast',
-			title: 'Berry Overnight Steel-Cut Oats',
-			iconColor: '#ff8d5e',
-			iconSrc: '/images/626aeef4f317e035c740e924_heart_fill_20_2_.svg',
-			iconAlt: 'Breakfast category heart icon'
-		},
-		{
-			url: '/recipes/wf-muesli-yogurt-parfait',
-			aria: 'Open recipe: 5-Minute Muesli Yogurt Parfait',
-			image: '/images/wefeasto/recipe-muesli-yogurt-parfait.jpg',
-			alt: 'Muesli yogurt parfait layered in a glass with fresh fruit',
-			cat: 'Breakfast',
-			title: '5-Minute Muesli Yogurt Parfait',
-			iconColor: '#ff8d5e',
-			iconSrc: '/images/626aeef4f317e035c740e924_heart_fill_20_2_.svg',
-			iconAlt: 'Breakfast category heart icon'
-		},
-		{
-			url: '/recipes/wf-choco-flakes-energy-bars',
-			aria: 'Open recipe: No-Bake Choco Flakes Energy Bars',
-			image: '/images/wefeasto/recipe-choco-flakes-energy-bars.jpg',
-			alt: 'Stack of no-bake choco flakes energy bars',
-			cat: 'Kids',
-			title: 'No-Bake Choco Flakes Energy Bars',
-			iconColor: '#d498eb',
-			iconSrc: '/images/626aeeee73f41522db4989fb_hamburger_fill.svg',
-			iconAlt: 'Kids category hamburger icon'
-		},
-		{
-			url: '/recipes/wf-health-mix-smoothie-bowl',
-			aria: 'Open recipe: Health Mix Banana Smoothie Bowl',
-			image: '/images/wefeasto/recipe-health-mix-smoothie-bowl.jpg',
-			alt: 'Health mix banana smoothie bowl topped with fruit and nuts',
-			cat: 'Breakfast',
-			title: 'Health Mix Banana Smoothie Bowl',
-			iconColor: '#ff8d5e',
-			iconSrc: '/images/626aeef4f317e035c740e924_heart_fill_20_2_.svg',
-			iconAlt: 'Breakfast category heart icon'
-		}
-	];
+	/* Newsletter ("Stay Crunchy", roadmap M6): double opt-in through the CMS,
+	   POST /api/store/newsletter (same origin; nothing goes to webflow.com).
+	   bublr subscribe-newsletter states: idle → loading (spinner) → success |
+	   error. The server answers 200 for every well-formed address, so there
+	   is no "already subscribed" state. `website` is a honeypot: people never
+	   see or fill it; the server silently drops submissions that do.
+	   The confirm / unsubscribe links in the emails land back here with
+	   ?subscribed=1|expired|error or ?unsubscribed=1|invalid|error
+	   (#newsletter; copy from contracts/retention-backend.md §2): the matching
+	   notice shows in this block and the param is dropped.
+	   Submit stays disabled until hydrated (nlReady): before that a tap or
+	   Enter would submit natively and subscribe nobody. The form is
+	   method="post" (was Webflow's "get") so the address can never end up in
+	   a URL, history or host logs even so. */
+	const NL_SUCCESS = 'Check your inbox to confirm — then breakfast recipes are on their way.';
+	const NL_FAIL = 'Oops! Something went wrong while submitting the form.';
+	const NL_NOTICES = {
+		'subscribed=1': { tone: 'done', text: 'You’re subscribed — check your inbox for your welcome treat.', hideForm: true },
+		'subscribed=expired': { tone: 'fail', text: 'That confirmation link has expired or was replaced — sign up again below.' },
+		'subscribed=error': { tone: 'fail', text: 'Something went wrong confirming — please tap the link in your email again.' },
+		'unsubscribed=1': { tone: 'done', text: 'You’re unsubscribed. You won’t get marketing emails from us.' },
+		'unsubscribed=invalid': { tone: 'fail', text: 'That unsubscribe link didn’t work — reply to any of our emails and we’ll take you off.' },
+		'unsubscribed=error': { tone: 'fail', text: 'Something went wrong — please try the link again.' }
+	};
 
-	/* Newsletter form — port of the Webflow runtime's form handler: POST the
-	   same payload to the same endpoint; code 200 → done block replaces the
-	   form, anything else (incl. offline) → fail block below the form. */
 	let email = $state('');
-	let btnLabel = $state('Submit');
-	let submitting = $state(false);
-	let formDone = $state(false);
-	let formFail = $state(false);
+	let website = $state(''); // honeypot
+	let nlState = $state('idle'); // idle | loading | success | error
+	let nlReady = $state(false); // hydrated: onSubmit is listening
+	let doneText = $state(NL_SUCCESS);
+	let failText = $state(NL_FAIL);
+	let formHidden = $state(false);
+	let doneShown = $state(false);
+	let failShown = $state(false);
+	const btnLabel = $derived(nlState === 'loading' ? 'Please wait...' : 'Submit');
 
 	async function onSubmit(e) {
 		e.preventDefault();
-		if (submitting) return;
-		submitting = true;
-		btnLabel = 'Please wait...';
-		const body = new URLSearchParams();
-		body.set('name', 'Email Form 2');
-		body.set('pageId', '626ae46f2ad86d3fbf0e2538');
-		body.set('elementId', '444d9879-d39a-e4ca-9e12-648151df61f2');
-		body.set('domain', 'the-foodie-fact-v2.webflow.io');
-		body.set('source', window.location.href);
-		body.set('test', 'false');
-		body.set('fields[Email]', email.trim());
-		body.set('dolphin', 'false');
-		let success = false;
-		try {
-			const res = await fetch('https://webflow.com/api/v1/form/626ae46f2ad86d0f390e253b', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: body.toString()
-			});
-			const json = await res.json();
-			success = !!(json && json.code === 200);
-		} catch (err) {
-			success = false;
+		if (nlState === 'loading') return;
+		nlState = 'loading';
+		failShown = false;
+		const r = await api('/store/newsletter', { method: 'POST', body: { email: email.trim(), website } });
+		const success = r.ok;
+		if (success) {
+			nlState = 'success';
+			doneText = NL_SUCCESS;
+			formHidden = true;
+			doneShown = true;
+			track('newsletter_signup');
+		} else {
+			nlState = 'error';
+			failText =
+				r.error?.code === 'VALIDATION'
+					? 'That email doesn’t look right — check it and try again.'
+					: r.error?.code === 'RATE_LIMITED'
+						? 'Too many tries — please wait a minute and try again.'
+						: r.error?.code === 'NETWORK' || r.error?.code === 'TIMEOUT'
+							? 'We couldn’t reach Wefeasto — check your connection and try again.'
+							: NL_FAIL;
+			failShown = true;
 		}
-		formDone = success;
-		formFail = !success;
-		btnLabel = 'Submit';
-		submitting = false;
 		await tick();
 		const region = document.querySelector(success ? '.w-form-done' : '.w-form-fail');
 		if (region) region.focus();
 	}
+
+	/** Typing again clears the error (bublr behaviour). */
+	function onEmailInput() {
+		if (nlState !== 'error') return;
+		nlState = 'idle';
+		failShown = false;
+	}
+
+	/* The confirm / unsubscribe redirects land on /#newsletter. The browser
+	   jumps to the hash while the page is still loading, and it measures the
+	   block with its slide-in transform applied (fx.js ix2SlideInBottom,
+	   y 100px). At 1280px that left the heading under the sticky nav once the
+	   slide finished. So the page lands again on the block's layout box
+	   (offsetTop ignores transforms) minus its scroll-margin-top: once after
+	   mount, and again when loading ends. It stops as soon as the visitor
+	   scrolls or presses anything. Returns a cleanup. */
+	function landOnNewsletter() {
+		const el = document.getElementById('newsletter');
+		if (!el) return () => {};
+		const stop = new AbortController();
+		const opts = { passive: true, capture: true, signal: stop.signal };
+		for (const type of ['wheel', 'touchstart', 'keydown', 'pointerdown']) addEventListener(type, () => stop.abort(), opts);
+		const land = () => {
+			if (stop.signal.aborted) return;
+			let top = 0;
+			// offsetTop counts from the offsetParent's padding edge: add its border
+			for (let n = el; n; n = n.offsetParent) top += n.offsetTop + (n === el ? 0 : n.clientTop);
+			const y = Math.max(0, Math.round(top - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0)));
+			if (Math.abs(scrollY - y) < 1) return;
+			scrollTo({ top: y, behavior: 'instant' });
+			syncLenis();
+		};
+		// A frame after mount, so the layout's effects (Lenis, ScrollTriggers) exist.
+		const frame = requestAnimationFrame(() => {
+			land();
+			if (document.readyState === 'complete') stop.abort();
+			else addEventListener('load', () => requestAnimationFrame(() => (land(), stop.abort())), { once: true, signal: stop.signal });
+		});
+		return () => {
+			cancelAnimationFrame(frame);
+			stop.abort();
+		};
+	}
+
+	onMount(() => {
+		nlReady = true;
+		const url = new URL(page.url);
+		const unland = url.hash === '#newsletter' ? landOnNewsletter() : undefined;
+		const key = ['subscribed', 'unsubscribed'].map((k) => url.searchParams.has(k) && `${k}=${url.searchParams.get(k)}`).find(Boolean);
+		if (!key) return unland;
+		const notice = NL_NOTICES[key];
+		if (notice) {
+			if (notice.tone === 'done') {
+				doneText = notice.text;
+				doneShown = true;
+				formHidden = !!notice.hideForm;
+			} else {
+				failText = notice.text;
+				failShown = true;
+			}
+		}
+		url.searchParams.delete('subscribed');
+		url.searchParams.delete('unsubscribed');
+		try {
+			replaceState(url, page.state);
+		} catch (err) {
+			history.replaceState(history.state, '', url);
+		}
+		return unland;
+	});
 </script>
 
 <svelte:head>
@@ -166,7 +194,7 @@
 </div>
 </div>
 <div id="w-node-_51053bcf-c72f-aa4b-4359-85a29d098b57-bf0e2538" class="div-block-77 _2">
-<img src="/images/wefeasto/hero.jpg" loading="lazy" alt="Wefeasto breakfast bowl of golden flakes with milk and fresh fruit" class="image-4">
+<img src="/images/wefeasto/hero.jpg" fetchpriority="high" alt="Wefeasto breakfast bowl of golden flakes with milk and fresh fruit" class="image-4">
 <div class="text-block-3-copy big featured">small batches · big crunch</div>
 </div>
 </div>
@@ -212,7 +240,7 @@
 <a href="/shop" class="button secondary w-inline-block"><div>Shop the Range</div></a>
 </div>
 <div class="divider _42px"></div>
-<div class="wf-reveal">
+<div class="wf-reveal wf-video-frame">
 <video class="wf-video wf-parallax-img" autoplay muted loop playsinline poster="/images/wefeasto/video-poster-trailer.jpg"><source src="/videos/wefeasto-trailer.mp4" type="video/mp4"></video>
 </div>
 </div>
@@ -224,6 +252,7 @@
 <a href="/shop" class="button secondary w-inline-block"><div>View All</div></a>
 </div>
 <div class="divider _42px"></div>
+<YourUsual variant="home" />
 <div class="w-dyn-list">
 <div role="list" class="grid-6 w-dyn-items">
 {#each bestsellers as card (card.url)}
@@ -237,7 +266,7 @@
 <a style={HOVER_HIDDEN} href={card.url} class="link-block-5 w-inline-block"><div>View Product</div></a>
 </div>
 <div class="div-block-83">
-<div>{card.priceLine}</div>
+<div>{liveCards?.get(card.url)?.priceLine ?? card.priceLine}{#if liveCards?.get(card.url)?.soldOut}{' · '}<span class="wf-soldout-note" data-wf-soldout>Sold out</span>{/if}</div>
 <div class="divider _6px"></div>
 <h4 class="heading-11">{card.title}</h4>
 <div>
@@ -255,6 +284,7 @@
 </div>
 </div>
 </div>
+{#if kitchenRecipes.length}<!-- no home-featured recipe: no empty "Fresh from the Kitchen" shelf -->
 <div id="w-node-c86b9e10-674e-deca-4b65-44d9e93e9bd3-bf0e2538" class="section">
 <div class="div-block-93"></div>
 </div>
@@ -301,13 +331,14 @@
 </div>
 </div>
 </div>
+{/if}
 <div id="w-node-_101e6ef3-ed37-5812-100c-d8e0cac85cb8-bf0e2538" class="section">
 <div class="div-block-93"></div>
 </div>
 <div id="w-node-_86d9c826-757d-dd28-4265-6af9138000de-bf0e2538" class="section">
 <div data-w-id="2b9dda2d-278b-a834-d4ea-e34e39d0b8cb" style="opacity: 0;" class="container">
 <div data-w-id="246c12c4-43c8-2f57-7b51-a7bf5199d844" class="div-block-100">
-<div class="div-block-101">
+<div class="div-block-101" id="newsletter">
 <div class="text-block-3">Stay Crunchy</div>
 <div class="divider"></div>
 <h2 class="heading-3">Fresh recipes and offers, monthly.</h2>
@@ -315,15 +346,17 @@
 <p class="p-large">Join the Wefeasto breakfast club — one email a month with fresh recipes from our kitchen, early access to offers, and first taste of new packs. No spam, just breakfast.</p>
 <div class="divider _42px mobile-32px"></div>
 <div class="form-block-2 w-form">
-<form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form" data-wf-page-id="626ae46f2ad86d3fbf0e2538" data-wf-element-id="444d9879-d39a-e4ca-9e12-648151df61f2" aria-label="Email Form 2" style={formDone ? 'display: none;' : undefined} onsubmit={onSubmit}>
-<input class="text-field-2 text-field-3 w-input" maxlength="256" name="email" data-name="Email" placeholder="Your Email Address" type="email" id="email" required bind:value={email}>
-<input type="submit" data-wait="Please wait..." class="button w-button" value={btnLabel} disabled={submitting || undefined}>
+<form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="post" class="form" data-wf-page-id="626ae46f2ad86d3fbf0e2538" data-wf-element-id="444d9879-d39a-e4ca-9e12-648151df61f2" aria-label="Email Form 2" aria-busy={nlState === 'loading' || undefined} data-wf-nl-state={nlState} style={formHidden ? 'display: none;' : undefined} onsubmit={onSubmit}>
+<input class="text-field-2 text-field-3 w-input" maxlength="256" name="email" data-name="Email" placeholder="Your Email Address" type="email" id="email" required bind:value={email} oninput={onEmailInput}>
+<div class="wf-hp"><input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" bind:value={website}></div>
+{#if nlState === 'loading'}<span class="wf-nl-spinner"><Spinner label="Subscribing" /></span>{/if}
+<input type="submit" data-wait="Please wait..." class="button w-button" value={btnLabel} disabled={!nlReady || nlState === 'loading' || undefined}>
 </form>
-<div class="w-form-done" tabindex="-1" role="region" aria-label="Email Form 2 success" style={formDone ? 'display: block;' : undefined}>
-<div>Thank you! Your submission has been received!</div>
+<div class="w-form-done" tabindex="-1" role="region" aria-label="Email Form 2 success" style={doneShown ? 'display: block;' : undefined}>
+<div>{doneText}</div>
 </div>
-<div class="w-form-fail" tabindex="-1" role="region" aria-label="Email Form 2 failure" style={formFail ? 'display: block;' : undefined}>
-<div>Oops! Something went wrong while submitting the form.</div>
+<div class="w-form-fail" tabindex="-1" role="region" aria-label="Email Form 2 failure" style={failShown ? 'display: block;' : undefined}>
+<div>{failText}</div>
 </div>
 </div>
 </div>

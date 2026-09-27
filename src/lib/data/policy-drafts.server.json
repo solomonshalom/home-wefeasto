@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "slug": "shipping",
+      "title": "Shipping Policy",
+      "bodyHtml": "<p><strong>Draft — to be reviewed by Wefeasto before publishing.</strong></p><h2>Where we deliver</h2><p>We deliver to serviceable PIN codes across India. If we can’t deliver to your PIN code, checkout tells you before you pay.</p><h2>When your order arrives</h2><p>Ships in 1–2 days · delivered in 3–7 days. Orders are packed and handed to our courier partner on working days; remote areas can take a little longer.</p><h2>Delivery charges</h2><p>Delivery is free on orders of ₹499 or more (the value of your items before any discount). Orders below ₹499 carry a delivery charge of ₹49, shown in your bag and at checkout before you pay.</p><h2>Cash on Delivery</h2><p>Cash on Delivery is available on orders up to ₹2,000 where our courier partner serves your PIN code, at no extra charge.</p><h2>Tracking your order</h2><p>Your order confirmation email has a link to follow your order. For anything else, message us on WhatsApp at +91 98452 62777 with your order number (it starts with WF-).</p><h2>Damaged or missing parcels</h2><p>If your parcel arrives damaged, opened or incomplete, please take a photo and tell us within 48 hours of delivery — our Refunds &amp; Cancellations policy explains what happens next.</p>",
+      "published": false
+    },
+    {
+      "slug": "refunds",
+      "title": "Refunds & Cancellations",
+      "bodyHtml": "<p><strong>Draft — to be reviewed by Wefeasto before publishing.</strong></p><h2>Cancelling an order</h2><p>You can cancel an order until it is shipped — message us on WhatsApp at +91 98452 62777 with your order number (it starts with WF-). Prepaid orders cancelled before dispatch are refunded in full.</p><h2>Returns</h2><p>Our cereals are food, so we can’t take back opened packs. If something is wrong with your order — a damaged or leaking pack, a wrong or missing item, or a product past its best-before date — tell us within 48 hours of delivery with your order number and a photo, and we’ll send a replacement or refund it.</p><h2>How refunds are paid</h2><p>Refunds for prepaid orders go back to the original payment method (UPI, card or net banking). We start the refund within 2 working days of approving it, and banks usually show it within 5–7 working days. Cash on Delivery orders are refunded to a UPI ID or bank account you share with us.</p><h2>Charged but no order?</h2><p>If money left your account but you didn’t receive an order confirmation, the payment is refunded to you — usually within 5–7 working days. Write to us with the payment reference if it hasn’t arrived.</p>",
+      "published": false
+    },
+    {
+      "slug": "grievances",
+      "title": "Grievance Redressal",
+      "bodyHtml": "<p><strong>Draft — to be reviewed by Wefeasto before publishing.</strong></p><p>In line with the Consumer Protection (E-Commerce) Rules, 2020, you can reach our Grievance Officer with any complaint about an order, a product or this website.</p><h2>Grievance Officer</h2><p>Name: [to be added]<br>Designation: [to be added]<br>Email: [to be added]<br>Phone: [to be added]</p><h2>Seller details</h2><p>Registered name: [to be added]<br>Address: [to be added]<br>FSSAI licence no.: [to be added]<br>GSTIN: [to be added]</p><h2>How we handle complaints</h2><p>We acknowledge every complaint within 48 hours and resolve it within one month of receiving it. Please include your order number (it starts with WF-) so we can find your order quickly.</p><h2>Quick help</h2><p>For questions about an order, message us on WhatsApp at +91 98452 62777.</p>",
+      "published": false
+    }
+  ]
+}

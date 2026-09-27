@@ -2,3 +2,11 @@ node_modules
 /build
 /.svelte-kit
 vite.config.js.timestamp-*
+.env
+.env.*
+!.env.example
+/test-results
+/playwright-report
+/e2e/.auth
+/e2e/.state
+/.e2e

@@ -2,6 +2,10 @@
 	/*
 	 * "Also available at" dropdown — port of the .wf-partners delegated toggle
 	 * (opens on trigger click, closes on any click outside the box).
+ *
+ * Rows are keyed by position: two CMS rows may share a URL ("Amazon" and
+ * "Amazon Fresh" on one listing), and a keyed each block throws on a
+ * duplicate key, in production too, which would tear down the whole page.
 	 */
 	import { onMount } from 'svelte';
 
@@ -24,4 +28,4 @@
 	});
 </script>
 
-<div class="wf-partners{open ? ' wf-open' : ''}" bind:this={box}><button type="button" class="wf-partners-trigger" onclick={toggle}>Also available at <span class="wf-partners-caret">▾</span></button><div class="wf-partners-list">{#each partners as partner (partner.url)}<a href={partner.url} target="_blank" rel="noopener" class="wf-partner-row"><span>{partner.name}</span><span class="wf-partner-buy">Buy ↗</span></a>{/each}</div></div>
+<div class="wf-partners{open ? ' wf-open' : ''}" bind:this={box}><button type="button" class="wf-partners-trigger" onclick={toggle}>Also available at <span class="wf-partners-caret">▾</span></button><div class="wf-partners-list">{#each partners as partner, i (i)}<a href={partner.url} target="_blank" rel="noopener" class="wf-partner-row"><span>{partner.name}</span><span class="wf-partner-buy">Buy ↗</span></a>{/each}</div></div>

@@ -47,6 +47,26 @@
   background-color: var(--plum, #d499eb);
 }
 
+/* Live stock (src/lib/live.js): the CMS has none of this product. The PDP
+   chip, the home card note, and AddToCart's aria-disabled "Sold out" state
+   (still a focusable link; a click adds nothing). */
+.wf-chip.wf-chip-soldout {
+  color: #fff;
+  background-color: #333;
+}
+
+.wf-soldout-note {
+  font-weight: 700;
+}
+
+.button.wf-soldout,
+.button.wf-soldout:hover,
+.button.wf-soldout:active {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+}
+
 /* Price text on cards / detail pages */
 .wf-price {
   color: #333;
@@ -383,6 +403,24 @@
   width: 100%;
   height: 100%;
   will-change: transform;
+}
+
+/* The home trailer scales 1.06 → 1 while it scrolls through (fx.js
+   initParallax). Nothing above it clipped that, so while the scrub caught up
+   it widened the page by a few px at >= 768px. The frame clips it now (clip,
+   not hidden: no scroll container) and carries the 1px border, which the
+   scaled video would otherwise push outside the clip. Same geometry as the
+   bare .wf-video: a 16:9 border-box with the video filling its content box. */
+.wf-video-frame {
+  overflow: clip;
+  border: 1px solid #000;
+  aspect-ratio: 16 / 9;
+}
+
+.wf-video-frame > .wf-video {
+  border: 0;
+  height: 100%;
+  aspect-ratio: auto;
 }
 
 /* ---------- search overlay ---------- */
@@ -1251,8 +1289,18 @@
   .wf-partners-trigger,
   .wf-partners-caret,
   .wf-card img,
-  .wf-search-card-media img {
+  .wf-search-card-media img,
+  .link-block-3.wf-menu-btn,
+  .wf-mnav .wf-mnav-close,
+  .wf-mnav .wf-mnav-link {
     transition: none;
+  }
+
+  /* Phase 2 UI kit: progress feedback slows down but never stops. (These
+     selectors are one notch more specific than their rules in the Phase 2
+     section at the end of the file, so they win despite coming first.) */
+  svg.wf-spinner {
+    animation-duration: 2.4s;
   }
 
   .button:hover,
@@ -1756,6 +1804,44 @@
   }
 }
 
+/* The pill is fixed at the bottom-left, and the footer's last row (the
+   Instagram / YouTube icons, the legal line) is at the bottom-left of every
+   page once it is scrolled to the end: without room the pill covered them
+   (clicks toggled the mix instead, a focused icon was hidden). Wherever the
+   pill is rendered, the footer ends with a band as tall as the pill's
+   footprint, so that row scrolls clear of it with the pill's own inset as
+   the gap: 16px + 36px pill = 52px above the viewport bottom, over 16px of
+   footer padding; phones: 12px + 34px = 46px, no footer padding, 12px gap.
+   A pseudo-element rather than padding so the regression guard can hide it
+   (tools/regression-allowlist.json v-colormix-footer-room).
+   scroll-padding-bottom: browsers that scroll a newly focused element only
+   just into view (Firefox) stop it above the pill, not under it. */
+body:has(.wf-colormix) .footer-section::after {
+  content: "";
+  height: 52px;
+  display: block;
+}
+
+html:has(.wf-colormix) {
+  scroll-padding-bottom: 68px;
+}
+
+@media screen and (max-width: 479px) {
+  body:has(.wf-colormix) .footer-section::after {
+    height: 58px;
+  }
+
+  html:has(.wf-colormix) {
+    scroll-padding-bottom: 58px;
+  }
+}
+
+@media print {
+  body:has(.wf-colormix) .footer-section::after {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .wf-colormix,
   .wf-colormix-switch,
@@ -1769,3 +1855,1031 @@
     display: none;
   }
 }
+
+/* ===== Phase 2: UI kit (PeepWalk, spinner, squiggle, mobile nav) ===== */
+/* Styles for src/lib/components/{PeepWalk,PeepStrip,Spinner,Squiggle,MobileNav}.svelte,
+   the hamburger in Nav.svelte and the error page. Colours are palette
+   literals / vars so the colour-mix shuffle remaps them. Reduced-motion
+   overrides live in the existing prefers-reduced-motion blocks above. */
+
+/* Inner scrollers opt out of Lenis (data-lenis-prevent); keep the page
+   behind them from scroll-chaining. */
+[data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* ---------- PeepWalk crowd (Open Peeps by Pablo Stanley, CC0) ---------- */
+/* Decorative canvas, 1:1 with bublr's crowd: 350px tall, full width, the
+   original ink-on-white sprites (no tint, no edge fade). The layout strip
+   sits right on the footer's top border, the ground the crowd walks behind. */
+.wf-peepwalk {
+  display: block;
+  width: 100%;
+  height: var(--peepwalk-h, 350px);
+  pointer-events: none;
+}
+
+/* Pause / play (WCAG 2.2.2), client-only and only while the crowd could
+   walk. A zero-height box right before the canvas, so nothing moves: the
+   button hangs over the strip's top right corner, in the empty sky above
+   the walkers. */
+.wf-peepwalk-ctl {
+  position: relative;
+  z-index: 1;
+  height: 0;
+}
+
+.wf-peepwalk-pause {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: #333;
+  background-color: #fffdfa;
+  border: 1px solid #333;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.wf-peepwalk-pause:hover {
+  background-color: #f9f4ef;
+}
+
+.wf-peepwalk-pause:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
+.wf-peepwalk-pause svg {
+  display: block;
+  flex: none;
+}
+
+@media print {
+  .wf-peepwalk,
+  .wf-peepwalk-ctl {
+    display: none;
+  }
+}
+
+/* ---------- spinner (bublr spinner.js) ---------- */
+.wf-spinner {
+  display: inline-block;
+  flex: none;
+  vertical-align: -.125em;
+  animation: wf-spin 1s linear infinite;
+}
+
+/* ?nofx=1 (set from JS): slower, never stopped */
+.wf-spinner.wf-spinner-slow {
+  animation-duration: 2.4s;
+}
+
+@keyframes wf-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- squiggle underline (bublr for-sale.js) ---------- */
+.wf-squiggle {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+  color: #2cdb69;
+}
+
+.wf-squiggle-coral {
+  color: #ff8d5e;
+}
+
+.wf-squiggle-plum {
+  color: #d499eb;
+}
+
+.wf-squiggle-yellow {
+  color: #ffc33a;
+}
+
+.wf-squiggle-ink {
+  color: #333;
+}
+
+/* ---------- mobile nav: hamburger (Nav.svelte) ---------- */
+/* Exists only where Webflow hides .nav-menu (<= 991px). Hidden on desktop,
+   so the icon row there is exactly as before. */
+.link-block-3.wf-menu-btn,
+.div-block.wf-menu-sep {
+  display: none;
+}
+
+.wf-menu-btn {
+  -webkit-appearance: none;
+  appearance: none;
+  color: #000;
+  cursor: pointer;
+  border-radius: 0;
+  padding: 0;
+  font: inherit;
+  transition: background-color .25s;
+}
+
+.wf-menu-btn svg {
+  display: block;
+  height: auto;
+}
+
+.link-block-3.wf-menu-btn:hover {
+  background-color: #ffc33a;
+}
+
+.wf-menu-btn:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: -4px;
+}
+
+@media screen and (max-width: 991px) {
+  .link-block-3.wf-menu-btn {
+    display: flex;
+  }
+
+  .div-block.wf-menu-sep {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 767px) {
+  /* The hamburger widens the icon row by 71px, and Webflow's fixed 200px
+     brand box (around a 54px logo) would then push it off screens narrower
+     than ~510px. Below 480px Webflow already sizes the brand to its logo. */
+  .grid-7 > .brand {
+    width: auto;
+  }
+}
+
+/* ---------- mobile nav: sheet (MobileNav.svelte, z 1050) ---------- */
+.wf-mnav-backdrop {
+  z-index: 1050;
+  touch-action: none; /* iOS ignores body overflow:hidden: no page drag via the backdrop */
+  background-color: rgba(51, 51, 51, .35);
+  position: fixed;
+  inset: 0;
+}
+
+.wf-mnav {
+  z-index: 1050;
+  color: #333;
+  background-color: #f9f4ef;
+  border-left: 1px solid #000;
+  flex-direction: column;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-shadow: -4px 0 20px rgba(51, 51, 51, .15);
+}
+
+.wf-mnav-head {
+  border-bottom: 1px solid #000;
+  flex: none;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 24px;
+  display: flex;
+}
+
+.wf-mnav-title {
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.wf-mnav-close {
+  -webkit-appearance: none;
+  appearance: none;
+  color: #000;
+  cursor: pointer;
+  background-color: #f9f4ef;
+  border: 0;
+  border-left: 1px solid #000;
+  border-radius: 0;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  padding: 0;
+  display: flex;
+  transition: background-color .25s;
+}
+
+.wf-mnav-close:hover {
+  background-color: var(--coral);
+}
+
+.wf-mnav-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wf-mnav-link {
+  color: #333;
+  border-bottom: 1px solid #000;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 36px;
+  text-decoration: none;
+  display: flex;
+  transition: background-color .25s;
+}
+
+.wf-mnav-link:hover {
+  background-color: var(--coral);
+}
+
+.wf-mnav-link[aria-current="page"] {
+  box-shadow: inset 4px 0 0 0 var(--coral);
+}
+
+.wf-mnav-arrow {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.wf-mnav-actions {
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+  grid-template-columns: 1fr 1fr;
+  padding: 24px;
+  display: grid;
+}
+
+.wf-mnav-btn {
+  gap: 8px;
+}
+
+.wf-mnav-count {
+  color: #333;
+  background-color: #ff8d5e;
+  border-radius: 100px;
+  justify-content: center;
+  align-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-flex;
+}
+
+.wf-mnav-close:focus-visible,
+.wf-mnav-link:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: -4px;
+}
+
+@media screen and (min-width: 992px) {
+  .wf-mnav-host {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .wf-mnav {
+    border-left: 0;
+    max-width: none;
+  }
+
+  .wf-mnav-head {
+    padding-left: 16px;
+  }
+
+  .wf-mnav-close {
+    width: 48px;
+    height: 48px;
+  }
+
+  .wf-mnav-link {
+    padding: 16px;
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .wf-mnav-actions {
+    padding: 16px;
+  }
+
+  /* Webflow sizes .button and .button.secondary differently here (44 vs 40px,
+     12 vs 14px, a 12px top margin); the pair in the sheet must match. */
+  .wf-mnav-actions .button.wf-mnav-btn {
+    height: 44px;
+    margin-top: 0;
+    font-size: 14px;
+  }
+}
+
+@media print {
+  .wf-mnav-host,
+  .wf-menu-btn,
+  .wf-menu-sep {
+    display: none !important;
+  }
+}
+
+/* ---------- error / 404 page (+error.svelte, .wf-cart-empty idiom) ---------- */
+.wf-notfound-lead {
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wf-notfound-actions {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media screen and (max-width: 479px) {
+  /* Same pairing as the menu sheet: Webflow's phone sizes for .button and
+     .button.secondary differ (44 vs 40px, 12 vs 14px, a 12px top margin), so
+     the two calls to action would sit out of line. They share the row in equal
+     halves while both labels fit (390px and up), and stack full width below. */
+  .wf-notfound-actions .button {
+    white-space: nowrap;
+    flex: 1 1 0;
+    height: 44px;
+    margin-top: 0;
+    padding: 0 16px 2px;
+    font-size: 14px;
+  }
+}
+
+/* ===== end Phase 2: UI kit ===== */
+
+/* ===== Phase 2: cart & toast ===== */
+/* Styles for src/lib/components/{CartToast,TopUp,FreeDeliveryMeter,YourUsual,
+   AnnouncementBar,ProductFacts}.svelte, the bag's honest-totals summary,
+   undo and link notes (routes/cart), the PDP perks line and the recipe-rail
+   buy button. Colours are palette literals (#ffc33a meter, #fff6e7 usual
+   card, #ffdede issue flag, #2cdb69 announcement), so the colour mix remaps
+   them; #333 ink never moves. Reduced-motion overrides are at the end of
+   this section (after the rules they override). */
+
+/* Visually hidden, still announced (toast live region). */
+.wf-sr-only {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+/* ---------- free-delivery meter + one-tap top-up (M1) ---------- */
+.wf-topup-block {
+  padding: 4px 0 2px;
+}
+
+.wf-topup-note {
+  color: #333;
+  padding: 0 0 8px;
+  font-size: 13px;
+  line-height: 150%;
+}
+
+.wf-meter {
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 100px;
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  transform-origin: 50% 50%;
+}
+
+/* Width is set from FreeDeliveryMeter.svelte (tweened with motion). */
+.wf-meter-fill {
+  background-color: #ffc33a;
+  border-radius: 100px;
+  width: 0;
+  height: 100%;
+}
+
+.wf-topup {
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  display: flex;
+}
+
+.wf-topup-thumb {
+  object-fit: cover;
+  background-color: #fff;
+  border: 1px solid #333;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.wf-topup-text {
+  color: #333;
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 13px;
+  line-height: 140%;
+}
+
+.wf-chip.wf-topup-add {
+  cursor: pointer;
+  font-family: inherit;
+  flex: none;
+  height: 32px;
+  border-radius: 100px;
+}
+
+.wf-chip.wf-topup-add:hover {
+  color: #fff;
+  background-color: #333;
+}
+
+.wf-topup-skip,
+.wf-toast-close,
+.wf-usual-dismiss,
+.wf-offer-remove,
+.wf-announce-close {
+  appearance: none;
+  -webkit-appearance: none;
+  color: #333;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-family: Moderat, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+  display: inline-flex;
+  transition: background-color .25s, color .25s, border-color .25s;
+}
+
+.wf-topup-skip:hover,
+.wf-toast-close:hover,
+.wf-usual-dismiss:hover,
+.wf-offer-remove:hover,
+.wf-announce-close:hover {
+  border-color: #333;
+}
+
+/* ---------- bag summary additions ---------- */
+[data-wf-delivery].wf-free {
+  font-weight: 700;
+}
+
+.wf-offer {
+  border: 1px dashed #333;
+  border-radius: 16px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 6px 6px 6px 12px;
+  display: flex;
+}
+
+/* Chip and sentence wrap as whole units ("will be applied at checkout"
+   drops below the chip rather than breaking mid-phrase). */
+.wf-offer-text {
+  color: #333;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 150%;
+  display: flex;
+}
+
+.wf-cart-issue {
+  color: #333;
+  background-color: #ffdede;
+  border-radius: 8px;
+  margin: 8px 0 0;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 150%;
+  display: inline-block;
+}
+
+.wf-cart-notes {
+  border-left: 3px solid #333;
+  margin-bottom: 24px;
+  padding: 4px 0 4px 12px;
+}
+
+.wf-cart-notes .wf-form-note {
+  margin: 0;
+  font-size: 13px;
+}
+
+.wf-qty-btn:disabled,
+.wf-qty-btn[aria-disabled="true"] {
+  cursor: default;
+  opacity: .35;
+}
+
+/* "+" at the cap stays focusable (aria-disabled, not disabled): no hover fill. */
+.wf-qty-btn[aria-disabled="true"]:hover {
+  background-color: transparent;
+}
+
+/* ---------- remove → undo (S4) ---------- */
+/* Not a .wf-cart-row: that class counts bag lines (legacy selectors, the
+   regression tools), so the undo row repeats the line's divider itself. */
+.wf-cart-undo {
+  border-bottom: 1px solid rgba(51, 51, 51, .18);
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.wf-cart-undo-text {
+  color: #333;
+  margin: 0;
+  font-size: 15px;
+}
+
+.wf-chip.wf-cart-undo-btn {
+  cursor: pointer;
+  font-family: inherit;
+  border-radius: 100px;
+}
+
+.wf-chip.wf-cart-undo-btn:hover {
+  color: #fff;
+  background-color: #333;
+}
+
+.wf-cart-undo-stack {
+  text-align: left;
+  border-top: 1px solid rgba(51, 51, 51, .18);
+  max-width: 560px;
+  margin: 0 auto 32px;
+}
+
+/* ---------- "Your usual" (M5) ---------- */
+.wf-usual {
+  color: #333;
+  background-color: #fff6e7;
+  border: 1px solid #333;
+  border-radius: 24px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 20px;
+  padding: 14px 16px 14px 22px;
+  display: flex;
+}
+
+.wf-usual-shop,
+.wf-usual-home {
+  margin-bottom: 32px;
+}
+
+.wf-usual-cart {
+  text-align: left;
+  max-width: 640px;
+  margin: 0 auto 24px;
+}
+
+.wf-usual-text {
+  flex: 1 1 260px;
+  min-width: 0;
+  font-size: 15px;
+  line-height: 150%;
+}
+
+.wf-usual-label {
+  font-weight: 700;
+}
+
+.wf-usual-actions {
+  align-items: center;
+  gap: 6px;
+  display: flex;
+}
+
+.button.wf-usual-add {
+  cursor: pointer;
+  white-space: nowrap;
+  height: 44px;
+  padding: 0 20px 2px;
+  font-size: 15px;
+}
+
+/* ---------- mini-bag toast (M4) ---------- */
+/* Fixed, outside .page-wrapper; z 1100 = above the mobile nav sheet (1050),
+   below the search overlay and veil (9999). Non-modal. */
+.wf-toast {
+  z-index: 1100;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 24px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  padding: 16px;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  box-shadow: 0 6px 18px rgba(51, 51, 51, .14);
+}
+
+.wf-toast-head {
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  display: flex;
+}
+
+.wf-toast-thumb {
+  object-fit: cover;
+  background-color: #fff;
+  border: 1px solid #333;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+.wf-toast-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 145%;
+}
+
+.wf-toast-actions {
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 14px;
+  display: grid;
+}
+
+/* (webflow.css gives .button.secondary a 12px top margin and 40px height on
+   phones; both buttons here share one row and one size.) */
+.wf-toast-actions .button {
+  white-space: nowrap;
+  height: 44px;
+  margin-top: 0;
+  padding: 0 12px 2px;
+  font-size: 14px;
+}
+
+@media screen and (max-width: 767px) {
+  .wf-toast {
+    width: auto;
+    max-width: none;
+    left: 16px;
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media screen and (max-width: 359px) {
+  .wf-toast-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Below 768px the toast spans the bottom edge, right where the colour-mix
+   pill sits (z 900, under the toast's 1100); the pill's lower edge and
+   shadow peeked out beneath it on phones. It steps aside while a toast is
+   up and comes back when it goes. */
+@media screen and (max-width: 767px) {
+  body:has([data-wf-toast]) .wf-colormix {
+    visibility: hidden;
+  }
+}
+
+/* ---------- announcement bar (S11, off by default) ---------- */
+.wf-announce {
+  color: #333;
+  text-align: center;
+  background-color: #2cdb69;
+  border-bottom: 1px solid #333;
+  justify-content: center;
+  align-items: center;
+  padding: .6rem 3rem;
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  display: flex;
+  position: relative;
+}
+
+.wf-announce-text {
+  color: #333;
+  margin: 0;
+  text-decoration: none;
+}
+
+a.wf-announce-text:hover {
+  text-decoration: underline;
+}
+
+.wf-announce-close {
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+@media screen and (max-width: 420px) {
+  .wf-announce {
+    padding: .55rem 2.75rem .55rem .75rem;
+    font-size: .8125rem;
+  }
+}
+
+/* ---------- PDP: perks line (S7) + product facts (M7) ---------- */
+.wf-perks {
+  color: #333;
+  margin: 0 0 12px;
+}
+
+.wf-facts {
+  color: #333;
+  border-top: 1px solid rgba(51, 51, 51, .25);
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 14px;
+}
+
+.wf-facts-summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  list-style: none;
+}
+
+/* webflow.css sets summary { display: block }, which drops the native
+   disclosure triangle, so the row gave no hint that it opens. Same caret as
+   the "Also available at" dropdown just above it (▾, flipped when open). The
+   "/ ''" alt text keeps screen readers from reading the glyph (older
+   browsers skip that declaration and use the one before it). */
+.wf-facts-summary::-webkit-details-marker {
+  display: none;
+}
+
+.wf-facts-summary::after {
+  content: "▾";
+  content: "▾" / "";
+  margin-left: 10px;
+  font-size: 12px;
+  line-height: 1;
+  transition: transform .2s;
+  display: inline-block;
+}
+
+.wf-facts[open] > .wf-facts-summary::after {
+  transform: rotate(180deg);
+}
+
+.wf-facts-list {
+  gap: 8px;
+  margin: 12px 0 0;
+  display: grid;
+}
+
+.wf-facts-row {
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 12px;
+  font-size: 14px;
+  line-height: 150%;
+  display: grid;
+}
+
+.wf-facts-row dt {
+  font-weight: 700;
+}
+
+.wf-facts-row dd {
+  margin: 0;
+}
+
+@media screen and (max-width: 479px) {
+  .wf-facts-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+/* ---------- recipe rail buy button (S10) ---------- */
+/* A fifth item in the rail (.div-block-183 is sticky top:90px on desktop,
+   static at <= 991px, so it follows the links). Names may wrap. */
+.button.wf-rail-add {
+  text-align: center;
+  height: auto;
+  min-height: 50px;
+  padding: 8px 18px 10px;
+  line-height: 1.25;
+}
+
+/* webflow.css lays the recipe page out as a fixed 200px rail + 900px column
+   (.grid-38, centred) down to 992px, where it stacks. From 992 to 1099px the
+   1100px grid is wider than its container, so it spilled out on both sides
+   and clipped the rail's "Add … · ₹X" button at the left edge. There the
+   column shrinks instead; from 1100px up the column has its 900px again. */
+@media screen and (min-width: 992px) and (max-width: 1099px) {
+  .grid-38 {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+}
+
+/* ---------- shop card add on phones (M4) ---------- */
+/* webflow.css (its <= 479px block) gives .div-block-83 `position: relative;
+   z-index: 2`, a stacking context BELOW the card's full-bleed .wf-card-cover
+   (z-index 4), so the .wf-shop-add button's z-index 5 only counted inside
+   that lower context and a tap on "Add to Cart" opened the PDP instead.
+   z-index auto keeps the element positioned but drops the context, so on
+   phones the button sits above the cover exactly as it does from 480px up.
+   Nothing inside the card body is painted differently (the cover is
+   transparent), and a tap anywhere else on the card still opens the product
+   page. Same breakpoint as the webflow rule it undoes. */
+@media screen and (max-width: 479px) {
+  .wf-card > .div-block-83 {
+    z-index: auto;
+  }
+}
+
+/* ---------- no sideways page scroll between 480 and 767 px ----------
+   Webflow resets its fixed widths only below 480px, so between 480 and 767px
+   (200% zoom on a laptop, phones in landscape) one over-wide child widened the
+   page's single grid column (.page-wrapper, 1fr) and the whole document
+   scrolled sideways. Fix the over-wide children themselves: clamping the
+   column instead would only clip them, and hide the overflow from the checks. */
+
+/* Newsletter ("Stay Crunchy"): a fixed 650px block in a narrower card. */
+.div-block-101 {
+  width: auto;
+  max-width: 650px;
+}
+
+@media screen and (min-width: 480px) and (max-width: 767px) {
+  /* Newsletter pill: the 320px field + Submit outgrew the card and clipped Submit. */
+  .div-block-101 .form {
+    max-width: 100%;
+  }
+
+  .div-block-101 .text-field-3 {
+    flex: 1 1 320px;
+    width: auto;
+    min-width: 0;
+  }
+
+  /* "Our Story" / "Why Wefeasto": two side-by-side 400px-tall cards (each split
+     text | photo) need ~553px; stack them (Webflow hides them below 480px) and
+     let a card grow to its copy instead of spilling out of the box. */
+  .grid-9._2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .grid-9._2 > .grid-4 {
+    height: auto;
+    max-height: none;
+  }
+
+  .grid-9._2 .div-block-81 {
+    height: auto;
+    min-height: 400px;
+  }
+
+  .grid-9._2 .image-4._2 {
+    max-height: none;
+  }
+
+  /* Recipe grids (/recipes, a recipe's "Related Posts", the /404 bestsellers):
+     webflow.css keeps `.grid-6._2` three-up here (its <=991px reset to two is
+     on `.grid-6`, which the two-class selector outranks; it drops to one only
+     below 480px). Three recipe cards and two 42px gaps need ~565px, so from 480
+     to ~560px the column grew past the screen and the centred content was cut
+     off on the left. Two-up, and minmax(0, 1fr) so a card's min-content width
+     can never push a track (and the page) wider than the screen again. /order's
+     own two-up override (wf-checkout.css, loaded later) still wins. */
+  .grid-6._2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* "Our Story" on phones. webflow.css hides #about (.grid-9._2) below 480px, but
+   it is where "Our Story" goes: the mobile menu (the only navigation on a
+   phone), the hero button and the footer link all point at /#about, and a
+   hidden target left them doing nothing. Show it: each card stacks its copy
+   over a 260px photo inside the one bordered box (webflow.css already makes
+   .grid-4 single-column here). */
+@media screen and (max-width: 479px) {
+  .grid-9._2 {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .grid-9._2 > .grid-4 {
+    height: auto;
+    max-height: none;
+    grid-row-gap: 0;
+  }
+
+  .grid-9._2 .div-block-81 {
+    height: auto;
+    min-height: 0;
+    padding: 32px 24px;
+  }
+
+  /* Stacked, the copy's right border would double the box's own. */
+  .grid-9._2 .div-block-81._3 {
+    border-right: 0;
+  }
+
+  .grid-9._2 .div-block-77 {
+    height: 260px;
+  }
+
+  .grid-9._2 .image-4._2 {
+    height: 100%;
+    max-height: none;
+  }
+}
+
+/* ---------- focus + motion ---------- */
+.wf-topup-add:focus-visible,
+.wf-topup-skip:focus-visible,
+.wf-toast-close:focus-visible,
+.wf-usual-dismiss:focus-visible,
+.wf-offer-remove:focus-visible,
+.wf-announce-close:focus-visible,
+.wf-cart-undo-btn:focus-visible,
+.wf-facts-summary:focus-visible,
+.wf-announce-text:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-chip.wf-topup-add,
+  .wf-chip.wf-cart-undo-btn,
+  .wf-topup-skip,
+  .wf-toast-close,
+  .wf-usual-dismiss,
+  .wf-offer-remove,
+  .wf-announce-close,
+  .wf-facts-summary::after {
+    transition: none;
+  }
+}
+
+@media print {
+  .wf-toast,
+  .wf-announce {
+    display: none !important;
+  }
+}
+
+/* ===== end Phase 2: cart & toast ===== */
